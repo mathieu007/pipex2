@@ -32,7 +32,10 @@
 		"wchar.h": "c",
 		"string.h": "c",
 		"unistd.h": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"pipex.h": "c"
 	},
-	"cmake.sourceDirectory": "${workspaceFolder}/push_swap_visualizer/build/_deps/imgui-src/examples/example_android_opengl3"
+	"cmake.sourceDirectory": "${workspaceFolder}/push_swap_visualizer/build/_deps/imgui-src/examples/example_android_opengl3",
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "keyhr.42-c-format"
 }

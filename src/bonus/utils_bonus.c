@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:44 by math              #+#    #+#             */
-/*   Updated: 2023/02/27 22:13:09 by math             ###   ########.fr       */
+/*   Updated: 2023/02/28 08:17:57 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-void	usage(void)
+void	usage_bonus(void)
 {
-	ft_putstr_fd("Error: Invalid arguments count", 2);
-	ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <...> <file2>\n", 1);
-	ft_putstr_fd("    ./pipex \"here_doc\" <LIMITER> <cmd> <cmd1> <...> <file>\n",
-					1);
-	exit(EXIT_SUCCESS);
+	printf("Error: Invalid arguments count.");
+	printf("Example: ./pipex <file1> <cmd1> <cmd2> <...> <file2>\n");
+	printf("Example: ./pipex \"here_doc\" <LIMITER> <cmd>"
+		"<cmd1> <...> <file>\n");
+	exit(EXIT_FAILURE);
 }
 
 int	open_file(char *argv, int i)

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 07:52:27 by mroy              #+#    #+#             */
-/*   Updated: 2023/02/28 08:15:04 by mroy             ###   ########.fr       */
+/*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
+/*   Updated: 2023/02/28 08:19:02 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "pipex.h"
 
-# define TMP_BUFFER_SIZE 10000
+void	error_exit(void)
+{
+	perror("Error");
+	exit(EXIT_FAILURE);
+}
 
-# include "libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*get_next_line_temp(int fd);
-
-#endif
+void	usage(void)
+{
+	printf("Error: Invalid argument count.\n", 2);
+	printf("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
+}

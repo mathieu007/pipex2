@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/02/28 06:38:10 by math             ###   ########.fr       */
+/*   Updated: 2023/02/28 08:00:41 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	error_exit(void)
+{
+	perror("Error");
+	exit(EXIT_FAILURE);
+}
 
 char	*find_path(char *cmd, char **envp)
 {
@@ -20,7 +26,7 @@ char	*find_path(char *cmd, char **envp)
 	char	*first;
 
 	i = 0;
-	while (ft_strnstr( [i], "PATH", 4) == 0)
+	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
 	paths = ft_split_temp(envp[i] + 5, ':');
 	i = 0;
@@ -33,12 +39,6 @@ char	*find_path(char *cmd, char **envp)
 		i++;
 	}
 	return (0);
-}
-
-void	error_exit(void)
-{
-	perror("Error");
-	exit(EXIT_FAILURE);
 }
 
 void	execute(char *argv, char **envp)
