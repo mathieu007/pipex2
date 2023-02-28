@@ -6,7 +6,7 @@
 /*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/02/27 22:28:36 by math             ###   ########.fr       */
+/*   Updated: 2023/02/28 06:38:10 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*find_path(char *cmd, char **envp)
 	char	*first;
 
 	i = 0;
-	while (ft_strnstr(envp[i], "PATH", 4) == 0)
+	while (ft_strnstr( [i], "PATH", 4) == 0)
 		i++;
 	paths = ft_split_temp(envp[i] + 5, ':');
 	i = 0;
