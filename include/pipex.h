@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/02 09:58:35 by gcollet           #+#    #+#             */
-/*   Updated: 2023/02/28 08:15:04 by mroy             ###   ########.fr       */
+/*   Created: 2023/02/28 15:21:35 by mroy              #+#    #+#             */
+/*   Updated: 2023/02/28 15:28:28 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
-
 # include "libft.h"
 # include <fcntl.h>
 # include <stdio.h>
@@ -21,10 +20,41 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-int		open_file(char *argv, int i);
-void	usage(void);
-void	error_exit(void);
-char	*find_path(char *cmd, char **envp);
-void	execute(char *argv, char **envp);
+typedef struct s_cmd
+{
+	char	**args;
+	char	*cmd;
+}			t_cmd;
+
+typedef struct s_file_d
+{
+	int32_t	fd;
+	char	*f_name;
+}			t_file_d;
+
+typedef struct s_proc
+{
+	t_file_d	file_in[1];
+	t_file_d	file_out[1];
+	pid_t	pid;
+	char	**paths;
+	t_cmd	**cmds;
+	int32_t	cmds_count;
+	char	**envp;
+}			t_proc;
+
+int32_t		open_file(char *argv, int i);
+void		unlink_fifo(char *f_name);
+void		usage(void);
+void		error_exit(void);
+char		*find_path(char *cmd, char **envp);
+void		execute(t_proc *proc, int32_t i);
+void		child_process(t_proc *proc, int32_t i);
+void		parent_process(t_proc *proc, int32_t i);
+char		**parse_paths(char **envp);
+t_cmd		**parse_cmds(t_proc *proc, char **argv, int32_t count);
+char		*get_full_path_cmd(t_proc *proc, char *cmd);
+void		free_all(void);
+t_proc		*get_proc(void);
 
 #endif

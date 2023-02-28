@@ -15,7 +15,7 @@
 /// @brief pools can be of variable size index: 1 = 2, 2 = 4, 3 = 8, 4 = 16 ...
 /// @param
 /// @return
-static t_pool_info	**get_pools(void)
+t_pool_info	**get_pools(void)
 {
 	static t_pool_info	*pools[64];
 
@@ -50,7 +50,7 @@ void	*alloc(size_t size_in_bytes)
 	pool = get_pools()[chunk_id];
 	cur_index = pool->count;
 	if (pool->count == pool->capacity && resize_pool(pool) == NULL)
-		return (free_all(), NULL);
+		return (free_p_all(), NULL);
 	pool->count++;
 	*(int32_t *)(pool->slots[cur_index]) = chunk_id;
 	return ((void *)&(pool->slots[cur_index])[8]);

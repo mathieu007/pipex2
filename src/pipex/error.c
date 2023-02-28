@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/02/28 08:19:02 by mroy             ###   ########.fr       */
+/*   Updated: 2023/02/28 15:24:11 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	error_exit(void)
 
 void	usage(void)
 {
-	printf("Error: Invalid argument count.\n", 2);
-	printf("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
+	printf("Error: Invalid argument count.\n");
+	printf("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n");
 }

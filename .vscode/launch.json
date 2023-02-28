@@ -8,12 +8,13 @@
             "request": "launch",
             "program": "${workspaceFolder}/pipex",
             "stopAtEntry": false,
+            "args": [
+                "infile", "ls -l", "wc -l", "outfile"
+            ],
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
-            "preLaunchTask": "pipex",
-            "miDebuggerPath": "/usr/bin/gdb"
         },
 		{
             "name": "Debug pipex_bonus",
@@ -25,8 +26,6 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
-            "preLaunchTask": "pipex_bonus",
-            "miDebuggerPath": "/usr/bin/gdb"
         }
     ],
     "version": "2.0.0"

@@ -128,5 +128,6 @@ int64_t	ft_exponent(int32_t a, int32_t b);
 void	*resize_pool(t_pool_info *pool);
 t_pool_info	**get_pools(void);
 char	*ft_strjoin_temp(char const *s1, char const *s2);
+void	free_p_all(void);
 
 #endif

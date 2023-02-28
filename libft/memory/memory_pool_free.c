@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	free_all(void)
+void	free_p_all(void)
 {
 	int32_t		i;
 	t_pool_info	**pools;
