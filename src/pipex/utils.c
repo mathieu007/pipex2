@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/02/28 15:35:59 by mroy             ###   ########.fr       */
+/*   Updated: 2023/02/28 16:50:24 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,13 @@ char	*get_full_path_cmd(t_proc *proc, char *cmd)
 void	execute(t_proc *proc, int32_t i)
 {
 	char	*fp_cmd;
+	int32_t	ret;
 
 	fp_cmd = get_full_path_cmd(proc, proc->cmds[i]->cmd);
 	if (!fp_cmd)
 		error_exit();
-	if (execve(fp_cmd, proc->cmds[i]->args, proc->envp) == -1)
+	
+	ret = execve(fp_cmd, proc->cmds[i]->args, proc->envp);
+	if (ret == -1)
 		error_exit();
 }

@@ -1,9 +1,7 @@
 {
     "configurations": [        
-		
-		
         {
-            "name": "Debug pipex",
+            "name": "pipex",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/pipex",
@@ -13,11 +11,12 @@
             ],
             "cwd": "${fileDirname}",
             "environment": [],
-            "externalConsole": false,
+              "externalConsole": false,
             "MIMode": "lldb",
+            "preLaunchTask": "pipex"
         },
 		{
-            "name": "Debug pipex_bonus",
+            "name": "pipex_bonus",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/pipex_bonus",
@@ -26,6 +25,7 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
+            "preLaunchTask": "pipex_bonus"
         }
     ],
     "version": "2.0.0"

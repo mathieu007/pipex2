@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/02/28 15:57:54 by mroy             ###   ########.fr       */
+/*   Updated: 2023/02/28 16:27:05 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 	int32_t	i;
 
 	if (argc != 5)
+	{
 		usage();
+	}
 	if (pipe(fds) == -1)
+	{
 		error_exit();
+	}
 	proc = init_data(argc, argv, envp, &fds[0]);
 	i = 0;
 	while (i < proc->cmds_count)
@@ -56,10 +60,12 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 		pid1 = fork();
 		if (pid1 == -1)
 			error_exit();
-		if (pid1 == 0)
-			child_process(proc, 1);
-		waitpid(pid1, &status, 0);
-		parent_process(proc, 0);
+		if (pid1 > 0)
+		{
+			parent_process(proc, i);
+			waitpid(pid1, &status, 0);
+		}
+		child_process(proc, i);
 		i++;
 	}
 	return (0);
