@@ -1,0 +1,5170 @@
+!<arch>
+//                                              676       `
+lst_filter_get_next.o/
+lst_filter_indices.o/
+lst_filter_avg.o/
+lst_free_internal.o/
+lst_new_internal.o/
+lst_free_data_internal.o/
+lst_reverse_select.o/
+_lst_group_by_add.o/
+lst_utils_internal.o/
+lst_filter_index_of.o/
+lst_utils_internal2.o/
+lst_filter_contains.o/
+lst_filter_last.o/
+lst_filter_max.o/
+lst_filter_get_nth.o/
+lst_filter_sum.o/
+lst_int_to_bool_array.o/
+lst_filter_count.o/
+ft_substr_temp.o/
+lst_sequence_equal.o/
+lst_filter_exclude.o/
+lst_filter_range.o/
+ft_split_many_temp.o/
+lst_filter_first.o/
+lst_get_alloc_size.o/
+_lst_group_by_internal.o/
+lst_filter_min.o/
+lst_group_by_get.o/
+_lst_group_by_new.o/
+lst_filter_include.o/
+ft_lstadd_front.o/
+ft_lstadd_back.o/
+ft_atoi.o/      0           0     0     644     1406      `
+!<arch>
+ft_atoi.c/      0           0     0     644     1338      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/19 08:29:43 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	iswhitespace(int c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	int	neg;
+	int	n;
+
+	neg = 1;
+	n = 0;
+	while (*str != '\0' && iswhitespace(*str) == 1)
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			neg = -1;
+		str++;
+	}
+	while (ft_isdigit(*str) == 1)
+		n = (n * 10) + (*str++ - 48);
+	return (n * neg);
+}
+ft_atoi_long.o/ 0           0     0     644     1428      `
+!<arch>
+ft_atoi_long.c/ 0           0     0     644     1360      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/19 08:29:43 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static bool	iswhitespace(int c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (true);
+	return (false);
+}
+
+long	ft_atoi_long(char *str)
+{
+	long	neg;
+	long	n;
+
+	neg = 1;
+	n = 0;
+	while (*str != '\0' && iswhitespace(*str) == 1)
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			neg = -1;
+		str++;
+	}
+	while (ft_isdigit(*str) == 1)
+		n = (n * (long)10) + (long)(*str++ - 48);
+	return (n * neg);
+}
+ft_bzero.o/     0           0     0     644     1136      `
+!<arch>
+ft_bzero.c/     0           0     0     644     1068      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 11:47:31 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/19 16:02:08 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_bzero(void *s, size_t n)
+{
+	char	*sc;
+	size_t	i;
+
+	sc = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		sc[i] = '\0';
+		i++;
+	}
+}
+ft_calloc.o/    0           0     0     644     1244      `
+!<arch>
+ft_calloc.c/    0           0     0     644     1175      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 11:47:31 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/28 14:34:39 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	char	*mem;
+	int		bytes_count;
+
+	bytes_count = count * size;
+	mem = (char *)malloc(count * size);
+	if (mem == NULL)
+		return (NULL);
+	mem = ft_memset(mem, '\0', bytes_count);
+	return (mem);
+}
+
+ft_isalnum.o/   0           0     0     644     1148      `
+!<arch>
+ft_isalnum.c/   0           0     0     644     1080      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/19 16:02:14 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_isalnum(int c)
+{
+	if ((c >= 'A' && c <= 'Z')
+		|| (c >= 'a' && c <= 'z')
+		|| (c >= '0' && c <= '9'))
+	{
+		return (1);
+	}
+	return (0);
+}
+ft_isalpha.o/   0           0     0     644     1118      `
+!<arch>
+ft_isalpha.c/   0           0     0     644     1049      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/19 16:02:19 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_isalpha(int c)
+{	
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+	{
+		return (1);
+	}
+	return (0);
+}
+
+ft_isascii.o/   0           0     0     644     1088      `
+!<arch>
+ft_isascii.c/   0           0     0     644     1019      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/19 16:02:24 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_isascii(int c)
+{	
+	if (c >= 0 && c <= 127)
+	{
+		return (1);
+	}
+	return (0);
+}
+
+ft_isdigit.o/   0           0     0     644     1082      `
+!<arch>
+ft_isdigit.c/   0           0     0     644     1013      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/19 16:02:29 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_isdigit(int c)
+{	
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+ft_isprint.o/   0           0     0     644     1080      `
+!<arch>
+ft_isprint.c/   0           0     0     644     1012      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/20 10:31:31 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_isprint(int c)
+{	
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
+}
+ft_itoa.o/      0           0     0     644     1594      `
+!<arch>
+ft_itoa.c/      0           0     0     644     1525      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/26 15:56:33 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	num_length(long nb)
+{
+	int	len;
+
+	len = 0;
+	if (nb < 0)
+	{
+		nb *= -1;
+		len++;
+	}
+	if (nb < 10 && nb > -10)
+		return (++len);
+	while (nb > 0)
+	{
+		nb /= 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	int		siz;
+	long	num;
+	char	*c_num;
+	int		i;
+
+	num = n;
+	siz = num_length(num);
+	i = 0;
+	c_num = malloc(sizeof(char) * (siz + 1));
+	if (!c_num)
+		return (NULL);
+	if (num < 0)
+	{
+		num *= -1;
+		c_num[0] = '-';
+		i = 1;
+	}
+	c_num[siz] = '\0';
+	while (siz-- != i)
+	{
+		c_num[siz] = num % 10 + '0';
+		num /= 10;
+	}
+	return (c_num);
+}
+
+ft_itoa_temp.o/ 0           0     0     644     1520      `
+!<arch>
+ft_itoa_temp.c/ 0           0     0     644     1452      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/26 15:56:33 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	num_length(long nb)
+{
+	int	len;
+
+	len = 0;
+	if (nb < 0)
+	{
+		nb *= -1;
+		len++;
+	}
+	if (nb < 10)
+		return (++len);
+	while (nb > 0)
+	{
+		nb /= 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa_temp(int n)
+{
+	int			siz;
+	long		num;
+	static char	*c_num;
+	int			i;
+
+	num = n;
+	siz = num_length(num);
+	i = 0;
+	if (num < 0)
+	{
+		num *= -1;
+		c_num[0] = '-';
+		i = 1;
+	}
+	c_num[siz] = '\0';
+	while (siz-- != i)
+	{
+		c_num[siz] = num % 10 + '0';
+		num /= 10;
+	}
+	return (c_num);
+}
+ft_memchr.o/    0           0     0     644     1272      `
+!<arch>
+ft_memchr.c/    0           0     0     644     1203      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/19 08:29:43 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	size_t				i;
+	unsigned char		uc;
+	const unsigned char	*us;
+
+	uc = (unsigned char)c;
+	us = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (us[i] == uc)
+			return ((void *)(&us[i]));
+		i++;
+	}
+	return (NULL);
+}
+
+ft_memcmp.o/    0           0     0     644     1290      `
+!<arch>
+ft_memcmp.c/    0           0     0     644     1221      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/19 08:29:43 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	size_t				i;
+	unsigned char		*us1;
+	const unsigned char	*us2;
+
+	us1 = (unsigned char *)s1;
+	us2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (us1[i] != us2[i])
+			return (us1[i] - us2[i]);
+		i++;
+	}
+	return (0);
+}
+
+ft_memcpy.o/    0           0     0     644     1294      `
+!<arch>
+ft_memcpy.c/    0           0     0     644     1225      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 12:11:32 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/27 11:05:36 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	char			*c_dst;
+	const char		*c_src;
+	unsigned long	i;
+
+	if (dst == NULL && src == NULL)
+		return (dst);
+	c_dst = (char *)dst;
+	c_src = (char *)src;
+	i = 0;
+	while (i < n)
+	{
+		c_dst[i] = c_src[i];
+		i++;
+	}
+	return (dst);
+}
+
+ft_memmove.o/   0           0     0     644     1380      `
+!<arch>
+ft_memmove.c/   0           0     0     644     1311      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 12:11:32 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/01 14:03:34 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	char	*src_c;
+	char	*dest_c;
+	size_t	i;
+
+	src_c = (char *)src; 
+	dest_c = (char *)dst;
+	i = 0;
+	if (dst == NULL && src == NULL)
+		return (dst);
+	if (dest_c > src_c)
+		while (len-- > 0)
+			dest_c[len] = src_c[len];
+	else
+	{
+		while (i < len)
+		{
+			dest_c[i] = src_c[i];
+			i++;
+		}
+	}
+	return (dst);
+}
+
+ft_memset.o/    0           0     0     644     1234      `
+!<arch>
+ft_memset.c/    0           0     0     644     1166      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/18 15:50:33 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	uc;
+	unsigned char	*ub;
+	unsigned long	i;
+
+	uc = (unsigned char) c;
+	ub = (unsigned char *) b;
+	i = 0;
+	while (i < len)
+	{
+		ub[i] = uc;
+		i++;
+	}
+	return (ub);
+}
+ft_putchar_fd.o/0           0     0     644     1056      `
+!<arch>
+ft_putchar_fd.c/0           0     0     644     988       `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/28 15:36:27 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+ft_putendl_fd.o/0           0     0     644     1116      `
+!<arch>
+ft_putendl_fd.c/0           0     0     644     1047      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/28 15:28:56 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	len;
+
+	len = ft_strlen(s);
+	write(fd, s, len);
+	write(fd, "\n", 1);
+}
+
+ft_putnbr_fd.o/ 0           0     0     644     1264      `
+!<arch>
+ft_putnbr_fd.c/ 0           0     0     644     1195      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/25 08:00:11 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	unsigned int	nbr;
+
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nbr = (unsigned int)(n * -1);
+	}
+	else
+		nbr = (unsigned int)n;
+	if (nbr >= 10)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd((char)(nbr % 10 + '0'), fd);
+}
+
+ft_putstr_fd.o/ 0           0     0     644     1092      `
+!<arch>
+ft_putstr_fd.c/ 0           0     0     644     1024      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/11/01 13:32:08 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_putstr_fd(char *c, int fd)
+{
+	int	len;
+
+	len = ft_strlen(c);
+	write(fd, c, len);
+}
+ft_split.o/     0           0     0     644     2242      `
+!<arch>
+ft_split.c/     0           0     0     644     2173      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/11/08 11:20:02 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	count_word(char const *s, char c)
+{
+	int	i;
+	int	count;
+	int	prev_pos;
+
+	i = 0;
+	count = 0;
+	prev_pos = -1;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+		{
+			if (i - prev_pos > 1)
+				count++;
+			prev_pos = i;
+		}
+		i++;
+	}
+	if (i - prev_pos > 1)
+		count++;
+	return (count);
+}
+
+static void	*clear(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split && split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+	return (NULL);
+}
+
+static char	**split_string(char **split, char const *s, char c)
+{
+	int	i;
+	int	start_i;
+	int	word_len;
+	int	split_i;
+
+	i = 0;
+	start_i = 0;
+	word_len = 0;
+	split_i = 0;
+	while (s[i] != '\0')
+	{
+		while (s[i] != c && s[i] != '\0')
+			i++;
+		word_len = i - start_i;
+		if (word_len > 0)
+		{
+			split[split_i] = ft_substr(s, start_i, word_len);
+			if (split[split_i++] == NULL)
+				return (clear(split));
+		}
+		while (s[i] == c && s[i] != '\0')
+			start_i = ++i;
+	}
+	split[split_i] = NULL;
+	return (split);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**split;
+	int		word_len;
+
+	word_len = count_word(s, c);
+	split = (char **)malloc(sizeof(char **) * (word_len + 1));
+	if (!split)
+		return (NULL);
+	return (split_string(split, s, c));
+}
+
+ft_strchr.o/    0           0     0     644     1258      `
+!<arch>
+ft_strchr.c/    0           0     0     644     1189      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/11/14 08:47:18 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+	int	s_l;
+
+	i = 0;
+	s_l = ft_strlen(s);
+	while (i <= s_l)
+	{
+		if ((unsigned char)s[i] == (unsigned char)c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (c == 0)
+		return ((char *)s);
+	return (NULL);
+}
+
+ft_strdup.o/    0           0     0     644     1410      `
+!<arch>
+ft_strdup.c/    0           0     0     644     1341      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 11:47:31 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/28 15:29:10 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static char	*ft_strcpy(char *dest, const char *src)
+{
+	int	i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*dest;
+	int		src_l;
+
+	src_l = ft_strlen(s1);
+	dest = (char *)malloc(sizeof(char) * (src_l + 1));
+	if (dest == NULL)
+		return ((void *)0);
+	dest = ft_strcpy(dest, s1);
+	return (dest);
+}
+
+ft_striteri.o/  0           0     0     644     1198      `
+!<arch>
+ft_striteri.c/  0           0     0     644     1130      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/28 15:29:12 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+{
+	unsigned int	s_l;
+	unsigned int	i;
+
+	s_l = (unsigned int)ft_strlen(s);
+	i = 0;
+	while (i < s_l)
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
+}
+ft_strjoin.o/   0           0     0     644     1338      `
+!<arch>
+ft_strjoin.c/   0           0     0     644     1269      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/28 15:29:13 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*mem;
+	size_t	s1_l;
+	size_t	s2_l;
+
+	s1_l = ft_strlen(s1);
+	s2_l = ft_strlen(s2);
+	mem = (char *)malloc(sizeof(char) * (s1_l + s2_l + 1));
+	if (!mem)
+		return (NULL);
+	ft_memcpy(mem, s1, s1_l);
+	ft_memcpy(&mem[s1_l], s2, s2_l);
+	mem[s1_l + s2_l] = '\0';
+	return (mem);
+}
+
+ft_strlcat.o/   0           0     0     644     1478      `
+!<arch>
+ft_strlcat.c/   0           0     0     644     1409      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 11:47:31 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/25 08:20:40 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	char		*d_cpy;
+	const char	*s_cpy;
+	size_t		n;
+	size_t		d_len;
+
+	s_cpy = src;
+	d_cpy = dst;
+	n = dstsize;
+	while (n-- != 0 && *d_cpy != '\0')
+		d_cpy++;
+	d_len = d_cpy - dst;
+	n = dstsize - d_len;
+	if (n == 0)
+		return (d_len + ft_strlen(s_cpy));
+	while (*s_cpy != '\0')
+	{
+		if (n != 1)
+		{
+			*d_cpy++ = *s_cpy;
+			n--;
+		}
+		s_cpy++;
+	}
+	*d_cpy = '\0';
+	return (d_len + (s_cpy - src));
+}
+
+ft_strlcpy.o/   0           0     0     644     1248      `
+!<arch>
+ft_strlcpy.c/   0           0     0     644     1180      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/18 11:47:31 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/21 11:20:06 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	unsigned long	i;
+
+	i = 0;
+	if (dstsize > 0)
+	{
+		while (--dstsize && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	while (src[i])
+		i++;
+	return (i);
+}
+ft_strlen.o/    0           0     0     644     1110      `
+!<arch>
+ft_strlen.c/    0           0     0     644     1042      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/19 16:00:43 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+size_t	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+ft_strmapi.o/   0           0     0     644     1344      `
+!<arch>
+ft_strmapi.c/   0           0     0     644     1275      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/24 15:14:51 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char			*mem;
+	unsigned int	s_l;
+	unsigned int	i;
+
+	s_l = (unsigned int)ft_strlen(s);
+	mem = (char *)malloc(sizeof(char) * (s_l + 1));
+	if (!mem)
+		return ((void *)0);
+	i = 0;
+	while (i < s_l)
+	{
+		mem[i] = (*f)(i, s[i]);
+		i++;
+	}
+	mem[i] = '\0';
+	return (mem);
+}
+
+ft_strncmp.o/   0           0     0     644     1310      `
+!<arch>
+ft_strncmp.c/   0           0     0     644     1241      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/19 08:29:43 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < n && s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		i++;
+	}
+	if (i != n)
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	return (0);
+}
+
+ft_strnstr.o/   0           0     0     644     1502      `
+!<arch>
+ft_strnstr.c/   0           0     0     644     1434      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/19 08:29:43 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+	size_t	i;
+	size_t	h_len;
+	size_t	n_len;
+
+	h_len = ft_strlen(haystack);
+	n_len = ft_strlen(needle);
+	i = 0;
+	if (n_len > len)
+		return (NULL);
+	if (needle == (void *)0 || *needle == '\0')
+		return ((char *)haystack);
+	while (i + n_len <= len && i < h_len)
+	{
+		if (haystack[i] == needle[0] && ft_strncmp(&haystack[i], needle,
+				n_len) == 0)
+		{
+			return ((char *)(&haystack[i]));
+		}
+		i++;
+	}
+	return (NULL);
+}
+ft_strrchr.o/   0           0     0     644     1266      `
+!<arch>
+ft_strrchr.c/   0           0     0     644     1197      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/19 08:29:43 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strrchr(const char *s, int c)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(s);
+	i = len;
+	while (i >= 0)
+	{
+		if ((unsigned char)s[i] == (unsigned char)c)
+			return ((char *)(&s[i]));
+		i--;
+	}
+	if (c == 0)
+		return ((char *)s);
+	return (NULL);
+}
+
+ft_strtrim.o/   0           0     0     644     2378      `
+!<arch>
+ft_strtrim.c/   0           0     0     644     2309      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/26 10:42:36 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	count_matching_chars(char const *s1, char const *set)
+{
+	int	i;
+	int	i2;
+	int	match;
+
+	i = 0;
+	i2 = 0;
+	match = 0;
+	while (s1[i] != '\0')
+	{
+		i2 = 0;
+		match = 0;
+		while (set[i2] != '\0')
+		{
+			if (set[i2] == s1[i])
+			{
+				match = 1;
+				break ;
+			}
+			i2++;
+		}
+		if (match != 1)
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+static int	reverse_count_matching_chars(char const *s1, char const *set)
+{
+	int	i;
+	int	i2;
+	int	match;
+
+	i = ft_strlen(s1) - 1;
+	i2 = 0;
+	match = 0;
+	while (i != 0)
+	{
+		i2 = 0;
+		match = 0;
+		while (set[i2] != '\0')
+		{
+			if (set[i2] == s1[i])
+			{
+				match = 1;
+				break ;
+			}
+			i2++;
+		}
+		if (match != 1)
+			return (ft_strlen(s1) - i - 1);
+		i--;
+	}
+	return (i);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*mem;
+	size_t	start_count;
+	size_t	end_count;
+	size_t	s1_l;
+	size_t	mem_l;
+
+	s1_l = ft_strlen(s1);
+	if (s1_l == 0)
+	{
+		mem = (char *)malloc(sizeof(char) * 1);
+		if (!mem)
+			return (NULL);
+		mem[0] = '\0';
+		return (mem);
+	}
+	start_count = count_matching_chars(s1, set);
+	end_count = reverse_count_matching_chars(s1, set);
+	mem_l = (s1_l - end_count - start_count);
+	mem = (char *)malloc(sizeof(char) * (mem_l + 1));
+	if (!mem)
+		return (NULL);
+	ft_memcpy(mem, &s1[start_count], mem_l);
+	mem[mem_l] = '\0';
+	return (mem);
+}
+
+ft_substr.o/    0           0     0     644     1638      `
+!<arch>
+ft_substr.c/    0           0     0     644     1569      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/12/09 10:33:45 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static size_t	ft_size(char const *s, unsigned int start, size_t len)
+{
+	size_t	s_l;
+	size_t	size;
+
+	s_l = ft_strlen(s);
+	if (start >= s_l)
+		size = 1;
+	else if (start + len <= s_l)
+		size = len + 1;
+	else
+		size = s_l - start + 1;
+	return (size);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*mem;
+	size_t	i;
+	size_t	size;
+
+	if (!s)
+		return (0);
+	size = ft_size(s, start, len);
+	mem = (char *)malloc(sizeof(char) * size);
+	if (!mem)
+		return (NULL);
+	i = 0;
+	while (i < (size - 1) && s[i + start] != '\0')
+	{
+		mem[i] = s[i + start];
+		i++;
+	}
+	mem[i] = '\0';
+	return (mem);
+}
+
+ft_tolower.o/   0           0     0     644     1086      `
+!<arch>
+ft_tolower.c/   0           0     0     644     1017      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/24 13:53:54 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_tolower(int c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
+}
+
+ft_toupper.o/   0           0     0     644     1086      `
+!<arch>
+ft_toupper.c/   0           0     0     644     1017      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/10/24 15:46:29 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
+}
+
+/0              0           0     0     644     1360      `
+!<arch>
+//                                              24        `
+lst_filter_get_next.c/
+
+/0              0           0     0     644     1207      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*lst_filter_get_next(t_lst *lst, bool (*conditions)(t_lst *lst,
+			int32_t index, void *values), void *values, int32_t start_index)
+{
+	int32_t	i;
+
+	i = start_index;
+	while (i < lst->_count)
+	{
+		if (conditions(lst, i, values))
+			return (lst_get(lst, i));
+		i++;
+	}
+	return ((void *)0);
+}
+
+/23             0           0     0     644     1556      `
+!<arch>
+//                                              22        `
+lst_filter_indices.c/
+/0              0           0     0     644     1405      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief the list returned is a list of indices that match the conditions
+/// @param lst
+/// @param match_item
+/// @param values
+/// @return
+t_lst	*lst_filter_indices(t_lst *lst, bool (*match_item)(void *item,
+			void *values), void *values)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+	void	*item;
+
+	i = 0;
+	new_lst = lst_new_temp(lst->_count, lst->_size);
+	while (i < lst->_count)
+	{
+		item = lst_get(lst, i);
+		if (match_item(item, values))
+			lst_add_int(new_lst, i);
+		i++;
+	}
+	return (new_lst);
+}
+
+lst_select.o/   0           0     0     644     2164      `
+!<arch>
+lst_select.c/   0           0     0     644     2096      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_select(t_lst *lst,
+					void *(*select)(void *item),
+					size_t size_of_elem)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+
+	new_lst = lst_new_temp(lst->_count, size_of_elem);
+	i = 0;
+	while (i < lst->_count)
+	{
+		lst_add(new_lst, select(lst_get(lst, i)));
+		i++;
+	}
+	return (new_lst);
+}
+
+t_lst	*lst_select_int(t_lst *lst, int32_t (*select)(void *item))
+{
+	t_lst	*new_lst;
+	int32_t	i;
+
+	new_lst = lst_new_temp(lst->_count, sizeof(int));
+	i = 0;
+	while (i < lst->_count)
+	{
+		lst_add_int(new_lst, select(lst_get(lst, i)));
+		i++;
+	}
+	return (new_lst);
+}
+
+int32_t	*lst_sel_int_to_array_fixed(t_lst *lst,
+									int32_t (*select)(t_lst *lst,
+														int32_t index))
+{
+	int32_t	*new_lst;
+	int32_t	i;
+
+	new_lst = (int32_t *)temp_pool(lst->_count * sizeof(int32_t));
+	i = 0;
+	while (i < lst->_count)
+	{
+		new_lst[i] = select(lst, i);
+		i++;
+	}
+	return (new_lst);
+}
+
+int32_t	*lst_sel_int_to_array_temp(t_lst *lst,
+									int32_t (*select)(t_lst *lst,
+														int32_t index))
+{
+	int32_t	*new_lst;
+	int32_t	i;
+
+	new_lst = (int32_t *)temp_pool(lst->_count * sizeof(int32_t));
+	i = 0;
+	while (i < lst->_count)
+	{
+		new_lst[i] = select(lst, i);
+		i++;
+	}
+	return (new_lst);
+}
+lst_insert.o/   0           0     0     644     2276      `
+!<arch>
+lst_insert.c/   0           0     0     644     2208      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_insert(t_lst *lst, int32_t index, void *item)
+{
+	if (!lst)
+		return (NULL);
+	if (lst->_capacity <= lst->_count + 10)
+		_internal_resize_insert(lst, index, 1);
+	else if (index == 0 && lst->_offset != 0)
+		lst->_offset--;
+	else if (index < lst->_count / 2 && lst->_offset != 0)
+	{
+		ft_memmove(lst_addr(lst, -1), lst_addr(lst, 0), index * lst->_size);
+		lst->_offset--;
+	}
+	else if (index > lst->_count / 2 && lst->_count + lst->_offset
+			+ 1 < lst->_capacity)
+		ft_memmove(lst_addr(lst, index + 1), lst_addr(lst, index), (lst->_count
+					- index) * lst->_size);
+	*lst_addr_ptr(lst, index) = item;
+	lst->_count++;
+	return (lst);
+}
+
+t_lst	*lst_insert_int(t_lst *lst, int32_t index, int32_t item)
+{
+	if (!lst)
+		return (NULL);
+	if (lst->_capacity <= lst->_count + 10)
+		_internal_resize_insert(lst, index, 1);
+	else if (index == 0 && lst->_offset != 0)
+		lst->_offset--;
+	else if (index < lst->_count / 2 && lst->_offset != 0)
+	{
+		ft_memmove(lst_addr(lst, -1), lst_addr(lst, 0), index * lst->_size);
+		lst->_offset--;
+	}
+	else if (index > lst->_count / 2 && lst->_count + lst->_offset
+			+ 1 < lst->_capacity)
+		ft_memmove(lst_addr(lst, index + 1), lst_addr(lst, index), (lst->_count
+					- index) * lst->_size);
+	*lst_addr_int_ptr(lst, index) = item;
+	lst->_count++;
+	return (lst);
+}
+lst_reset.o/    0           0     0     644     1112      `
+!<arch>
+lst_reset.c/    0           0     0     644     1043      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_reset(t_lst *lst)
+{
+	if (!lst)
+		return (NULL);
+	lst->_offset = lst->_capacity / 3;
+	lst->_count = 0;
+	return (lst);
+}
+
+lst_group_by.o/ 0           0     0     644     2230      `
+!<arch>
+lst_group_by.c/ 0           0     0     644     2161      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+static void	_group_data(t_group_by *group_by_clause,
+						t_lst *data_copy,
+						bool (*comparer)(t_lst *lst, int32_t index,
+								int32_t prev_index))
+{
+	int32_t	i;
+	int32_t	j;
+	t_lst	*group;
+
+	i = 0;
+	j = i;
+	while (i < data_copy->_count)
+	{
+		j = i + 1;
+		group = lst_new_temp(8, data_copy->_size);
+		_lst_group_by_add_temp(group_by_clause, group);
+		lst_add(group, (void *)lst_get(data_copy, i));
+		while (j < data_copy->_count)
+		{
+			if (comparer(data_copy, j, i) && i + 1 != j)
+			{
+				i++;
+				lst_swap(data_copy, i, j, 1);
+				lst_add(group, (void *)lst_get(data_copy, i));
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+/// @brief The comparer func is just a function that compare the current item.
+/// with the previous one, if the current value is the same as the previous one,
+/// then you should return true otherwise false.
+/// @param lst
+/// @param start_index
+/// @param field_offset
+/// @param val
+/// @return
+t_group_by	*lst_group_by(t_lst *lst, bool (*comparer)(t_lst *lst,
+			int32_t index, int32_t prev_index))
+{
+	t_group_by	*group_by_clause;
+	t_lst		*data_copy;
+
+	data_copy = lst_copy_temp(lst);
+	group_by_clause = _lst_group_by_new_temp(lst->_count / 5);
+	_group_data(group_by_clause, data_copy, comparer);
+	return (group_by_clause);
+}
+
+/45             0           0     0     644     1470      `
+!<arch>
+//                                              18        `
+lst_filter_avg.c/
+/0              0           0     0     644     1323      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief Find the smallest item field
+/// Then return the item.
+/// @param lst
+/// @param start_index
+/// @param field_offset
+/// @param val
+/// @return
+int64_t	lst_filter_avg(t_lst *lst, int64_t (*select)(t_lst *lst, int32_t index))
+{
+	int32_t	i;
+	int64_t	avg;
+	int64_t	count;
+
+	i = 0;
+	count = 0;
+	avg = 0;
+	while (i < lst->_count)
+	{
+		avg += select(lst, i);
+		i++;
+		count++;
+	}
+	return (avg / count);
+}
+
+/63             0           0     0     644     1406      `
+!<arch>
+//                                              22        `
+lst_free_internal.c/
+
+/0              0           0     0     644     1256      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_free_internal.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2023/02/13 15:29:06 by math             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+void	*_free_malloc(t_lst *lst)
+{
+	if (!lst)
+		return (NULL);
+	if (!lst->data)
+		return (free(lst), NULL);
+	free(lst->data);
+	return (NULL);
+}
+
+void	*_free_fixed(t_lst *lst)
+{
+	free(lst->data);
+	return (NULL);
+}
+
+void	*_free_temp(t_lst *lst)
+{
+	free(lst->data);
+	return (NULL);
+}
+
+void	*_free_static(t_lst *lst)
+{
+	(void)lst;
+	return (NULL);
+}
+/84             0           0     0     644     1434      `
+!<arch>
+//                                              20        `
+lst_new_internal.c/
+/0              0           0     0     644     1285      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_new_internal.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/21 09:59:43 by marvin            #+#    #+#             */
+/*   Updated: 2023/02/02 08:40:03 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+void	*_malloc(t_lst *lst, size_t size)
+{
+	(void)lst;
+	return (malloc(size));
+}
+
+void	*_alloc_static(t_lst *lst, size_t size)
+{
+	(void)size;
+	exit(138);
+	return ((void *)lst->data);
+}
+
+void	*_alloc_temp(t_lst *lst, size_t size)
+{
+	(void)lst;
+	return ((void *)temp_pool(size));
+}
+
+void	*_alloc_fixed(t_lst *lst, size_t size)
+{
+	(void)lst;
+	return ((void *)mem_pool(size));
+}
+/104            0           0     0     644     1344      `
+!<arch>
+//                                              26        `
+lst_free_data_internal.c/
+/0              0           0     0     644     1189      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_free_data_internal.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2023/02/13 15:29:13 by math             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+void	*_free_data_malloc(void *data)
+{
+	free(data);
+	return (NULL);
+}
+
+void	*_free_data_fixed(void *data)
+{
+	(void)data;
+	return (NULL);
+}
+
+void	*_free_data_temp(void *data)
+{
+	(void)data;
+	return (NULL);
+}
+
+void	*_free_data_static(void *data)
+{
+	(void)data;
+	return (NULL);
+}
+
+lst_new.o/      0           0     0     644     3732      `
+!<arch>
+lst_new.c/      0           0     0     644     3664      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_new(int32_t array_elem_count, int32_t size_of_elem)
+{
+	t_lst	*lst;
+
+	lst = malloc(sizeof(t_lst));
+	if (!lst)
+		return (NULL);
+	lst->_offset = array_elem_count;
+	array_elem_count *= 3;
+	lst->_alloc = &_malloc;
+	lst->_free = &_free_malloc;
+	lst->_free_data = &_free_data_malloc;
+	lst->data = lst->_alloc(lst, array_elem_count * size_of_elem);
+	if (!lst->data)
+		return (free(lst), NULL);
+	lst->_count = 0;
+	lst->_is_static = false;
+	lst->_size = size_of_elem;
+	lst->_capacity = array_elem_count;
+	return (lst);
+}
+
+/// @brief you will pass the data buffer yourself.
+/// WARNING this list cannot be resized if you you execute a function that execute a _resize
+/// the app will crash
+/// static data[size]: size should be more than necessary at least 3 time the expected size
+/// WARNING size_of_elem should be the size of the struct itself not the pointer size.
+/// @param array_size
+/// @param size_of_elem
+/// @return
+t_lst	*lst_new_static(void *data, int32_t max_capacity, size_t size_of_elem)
+{
+	t_lst	*lst;
+
+	lst = (t_lst *)data;
+	lst->_offset = max_capacity / 3;
+	lst->data = &((uint8_t *)data)[sizeof(t_lst)];
+	lst->_alloc = &_alloc_static;
+	lst->_free = &_free_static;
+	lst->_free_data = &_free_data_static;
+	lst->_size = size_of_elem;
+	lst->_is_static = true;
+	lst->_capacity = max_capacity;
+	return (lst);
+}
+
+/// @brief WARNING: if you use the memory pool the array will be twice the size expected.
+/// no resize ever possible.
+/// use this for temporary lst which will be deleted at the end of a function.
+/// @param array_size
+/// @param size_of_elem
+/// @return
+t_lst	*lst_new_temp(int32_t array_elem_count, int32_t size_of_elem)
+{
+	t_lst	*lst;
+
+	lst = (t_lst *)temp_pool(sizeof(t_lst));
+	lst->_offset = array_elem_count;
+	array_elem_count *= 3;
+	lst->_alloc = &_alloc_temp;
+	lst->_free = &_free_temp;
+	lst->_free_data = &_free_data_temp;
+	lst->data = lst->_alloc(lst, array_elem_count * size_of_elem);
+	lst->_count = 0;
+	lst->_is_static = false;
+	lst->_size = size_of_elem;
+	lst->_capacity = array_elem_count;
+	return (lst);
+}
+
+/// @brief WARNING: if you use the memory pool the array will be twice the size expected.
+/// no resize ever possible.
+/// use this for lst which will use the fixed pool of memory.
+/// unexpected result if not enough memory the pool.
+t_lst	*lst_new_fixed(int32_t array_elem_count, int32_t size_of_elem)
+{
+	t_lst	*lst;
+
+	lst = (t_lst *)mem_pool(sizeof(t_lst));
+	lst->_offset = array_elem_count;
+	array_elem_count *= 3;
+	lst->_alloc = &_alloc_fixed;
+	lst->_free = &_free_fixed;
+	lst->_free_data = &_free_data_fixed;
+	lst->data = lst->_alloc(lst, array_elem_count * size_of_elem);
+	lst->_count = 0;
+	lst->_size = size_of_elem;
+	lst->_is_static = true;
+	lst->_capacity = array_elem_count;
+	return (lst);
+}
+/130            0           0     0     644     1692      `
+!<arch>
+//                                              22        `
+lst_reverse_select.c/
+/0              0           0     0     644     1542      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_reverse_select(t_lst *lst,
+							void *(*select)(t_lst *lst, int32_t index))
+{
+	t_lst	*new_lst;
+	int32_t	i;
+
+	new_lst = lst_new_temp(lst->_count, sizeof(int32_t));
+	i = lst->_count - 1;
+	while (i >= 0)
+	{
+		lst_add(new_lst, select(lst, i));
+		i--;
+	}
+	return (new_lst);
+}
+
+int32_t	*lst_reverse_select_int(t_lst *lst,
+								int32_t (*select)(t_lst *lst,
+													int32_t index))
+{
+	int32_t	*new_lst;
+	int32_t	i;
+	int32_t	j;
+
+	new_lst = (int32_t *)temp_pool(lst->_count * sizeof(int32_t));
+	i = lst->_count - 1;
+	j = 0;
+	while (i >= 0)
+	{
+		new_lst[j] = select(lst, i);
+		i--;
+		j++;
+	}
+	return (new_lst);
+}
+ft_split_temp.o/0           0     0     644     1038      `
+!<arch>
+ft_split_temp.c/0           0     0     644     970       `
+
+#include "lst.h"
+
+static int	count_word(char const *s, char c)
+{
+	int	i;
+	int	count;
+	int	prev_pos;
+
+	i = 0;
+	count = 0;
+	prev_pos = -1;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+		{
+			if (i - prev_pos > 1)
+				count++;
+			prev_pos = i;
+		}
+		i++;
+	}
+	if (i - prev_pos > 1)
+		count++;
+	return (count);
+}
+
+static char	**split_string(char **split, char const *s, char c)
+{
+	int	i;
+	int	start_i;
+	int	word_len;
+	int	split_i;
+
+	i = 0;
+	start_i = 0;
+	word_len = 0;
+	split_i = 0;
+	while (s[i] != '\0')
+	{
+		while (s[i] != c && s[i] != '\0')
+			i++;
+		word_len = i - start_i;
+		if (word_len > 0)
+		{
+			split[split_i++] = ft_substr_temp(s, start_i, word_len);
+		}
+		while (s[i] == c && s[i] != '\0')
+			start_i = ++i;
+	}
+	split[split_i] = NULL;
+	return (split);
+}
+
+char	**ft_split_temp(char const *s, char c)
+{
+	char	**split;
+	int		word_len;
+
+	word_len = count_word(s, c);
+	split = (char **)temp_pool(sizeof(char **) * (word_len + 1));
+	return (split_string(split, s, c));
+}
+/152            0           0     0     644     1304      `
+!<arch>
+//                                              22        `
+_lst_group_by_add.c/
+
+/0              0           0     0     644     1153      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_group_by	*_lst_group_by_add_temp(t_group_by *grp, t_lst *lst)
+{
+	if (!grp)
+		return (NULL);
+	if (grp->_array_length <= grp->_group_count + 1)
+		_internal_group_by_resize_temp(grp, 1);
+	grp->data[grp->_group_count] = lst;
+	return (grp);
+}
+
+lst_order_by.o/ 0           0     0     644     1698      `
+!<arch>
+lst_order_by.c/ 0           0     0     644     1630      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief The comparer func must return the index of one of the smallest item.
+/// it's the func that s hould define if it should be ordered by desc or asc.
+/// make a copy of the list if you don<t want the list to be modified.
+/// @param lst
+/// @param start_index
+/// @param field_offset
+/// @param val
+/// @return
+t_lst	*lst_order_by(t_lst *lst, int32_t (*comparer)(t_lst *lst, int32_t index,
+			int32_t prev))
+{
+	int32_t	i;
+	int32_t	j;
+	int32_t	swap_index;
+
+	i = 0;
+	j = i;
+	while (i < lst->_count)
+	{
+		swap_index = i;
+		j = i + 1;
+		while (j < lst->_count)
+		{
+			swap_index = comparer(lst, j, swap_index);
+			j++;
+		}
+		if (swap_index != i)
+			lst_swap(lst, i, swap_index, 1);
+		i++;
+	}
+	return (lst);
+}
+/173            0           0     0     644     3554      `
+!<arch>
+//                                              22        `
+lst_utils_internal.c/
+/0              0           0     0     644     3404      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+int32_t	_lst_start_i(t_lst *lst)
+{
+	return (lst->_offset * lst->_size);
+}
+
+int32_t	_lst_end_i(t_lst *lst)
+{
+	return ((lst->_offset * lst->_size) + (lst->_count * lst->_size));
+}
+
+t_lst	*_internal_resize_temp(t_lst *lst, int32_t elem_count_to_add)
+{
+	uint8_t	*old_data;
+	int32_t	new_length;
+	int32_t	new_offset;
+
+	new_length = lst->_capacity * 3;
+	old_data = lst->data;
+	while (new_length <= lst->_count + elem_count_to_add)
+		new_length *= 3;
+	lst->data = temp_pool(new_length * lst->_size);
+	if (!lst->data)
+		return (NULL);
+	new_offset = (new_length / 2) - ((lst->_count + elem_count_to_add) / 2);
+	ft_memcpy(&lst->data[new_offset * lst->_size],
+				&old_data[lst->_offset * lst->_size],
+				lst->_count * lst->_size);
+	lst->_capacity = new_length;
+	lst->_offset = new_offset;
+	free(old_data);
+	return (lst);
+}
+
+t_lst	*_internal_resize(t_lst *lst, int32_t elem_count_to_add)
+{
+	uint8_t	*old_data;
+	int32_t	new_length;
+	int32_t	new_offset;
+
+	new_length = lst->_capacity * 3;
+	old_data = lst_addr(lst, 0);
+	while (new_length <= lst->_count + elem_count_to_add)
+		new_length *= 3;
+	lst->data = lst->_alloc(lst, new_length * lst->_size);
+	if (!lst->data)
+		return (NULL);
+	lst->_capacity = new_length;
+	new_offset = (new_length / 2) - ((lst->_count + elem_count_to_add) / 2);
+	lst->_offset = new_offset;
+	ft_memmove(lst_addr(lst, 0),
+				old_data,
+				lst->_count * lst->_size);
+	lst->_capacity = new_length;
+	lst->_free_data((void *)old_data);
+	return (lst);
+}
+
+/// @brief use this function only if capacity is not big enough.
+/// this function will resize the data and leave an empty space of:
+/// elem_count at index.
+/// @param lst
+/// @param index
+/// @param elem_count_to_insert
+/// @return
+t_lst	*_internal_resize_insert(t_lst *lst, int32_t index, int32_t elem_count)
+{
+	uint8_t	*old_data;
+	int32_t	new_length;
+	int32_t	new_offset;
+
+	new_length = lst->_capacity * 3;
+	old_data = &(lst->data)[lst->_offset * lst->_size];
+	while (new_length <= lst->_count + elem_count)
+		new_length *= 3;
+	lst->_capacity = new_length;
+	lst->data = lst->_alloc(lst, new_length * lst->_size);
+	if (!lst->data)
+		return (NULL);
+	new_offset = (new_length / 2) - ((lst->_count + elem_count) / 2)
+		+ elem_count;
+	lst->_offset = new_offset;
+	if (index > 0)
+	{
+		ft_memmove(lst_addr(lst, new_offset), old_data, index * lst->_size);
+	}
+	ft_memmove(lst_addr(lst, index + elem_count),
+				&old_data[index * lst->_size],
+				(lst->_count - index) * lst->_size);
+	lst->_free_data((void *)old_data);
+	return (lst);
+}
+/195            0           0     0     644     1584      `
+!<arch>
+//                                              24        `
+lst_filter_index_of.c/
+
+/0              0           0     0     644     1431      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+int32_t	lst_filter_index_of_start_at(
+	t_lst *lst, bool (*conditions)(t_lst *lst, int32_t index, void *values),
+		int32_t start_index, void *values)
+{
+	int32_t	i;
+
+	i = start_index;
+	while (i < lst->_count)
+	{
+		if (conditions(lst, i, values))
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int32_t	lst_filter_index_of(t_lst *lst, bool (*conds)(void *item, void *values),
+		void *values)
+{
+	int32_t	i;
+
+	i = 0;
+	while (i < lst->_count)
+	{
+		if (conds(lst_get(lst, i), values))
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+/218            0           0     0     644     2066      `
+!<arch>
+//                                              24        `
+lst_utils_internal2.c/
+
+/0              0           0     0     644     1914      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+bool	_lst_can_add(t_lst *lst, int32_t elem_count)
+{
+	if (lst->_count + lst->_offset + elem_count < lst->_capacity)
+	{
+		return (true);
+	}
+	return (false);
+}
+
+/// @brief get middle addr + a custom offset.
+/// @param lst
+/// @param offset
+/// @return
+void	*_lst_addr_mid(t_lst *lst, int32_t offset)
+{
+	return ((void *)&lst->data[((lst->_capacity / 2) - (lst->_count / 2)
+			+ offset) * lst->_size]);
+}
+
+/// @brief get middle offset + a custom offset.
+/// @param lst
+/// @param offset
+/// @return
+int32_t	_lst_offset_mid(t_lst *lst, int32_t offset)
+{
+	return ((lst->_capacity / 2) - (lst->_count / 2) + offset);
+}
+
+/// @brief get middle offset + a custom offset.
+/// @param lst
+/// @param offset
+/// @return
+int32_t	_lst_index_mid(t_lst *lst, int32_t offset)
+{
+	return (((lst->_capacity / 2) - (lst->_count / 2) + offset));
+}
+/// @brief get the adress at offset
+/// @param lst
+/// @param offset
+/// @return
+void	*_lst_addr_offset(t_lst *lst, int32_t offset)
+{
+	return (&lst->data[offset * lst->_size]);
+}/241            0           0     0     644     1064      `
+!<arch>
+//                                              24        `
+lst_filter_contains.c/
+
+/0              0           0     0     644     912       `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+/264            0           0     0     644     1574      `
+!<arch>
+//                                              20        `
+lst_filter_last.c/
+
+/0              0           0     0     644     1426      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*lst_filter_last(t_lst *lst, bool (*conditions)(t_lst *lst,
+			int32_t index, void *values), void *values)
+{
+	int32_t	i;
+
+	i = lst->_count - 1;
+	while (i >= 0)
+	{
+		if (conditions(lst, i, values))
+			return (lst_get(lst, i));
+		i--;
+	}
+	return ((void *)0);
+}
+
+int32_t	lst_filter_last_index_of(t_lst *lst, bool (*conditions)(void *item,
+			void *values), void *values)
+{
+	int32_t	i;
+
+	i = lst->_count - 1;
+	while (i >= 0)
+	{
+		if (conditions(lst_get(lst, i), values))
+			return (i);
+		i--;
+	}
+	return (-1);
+}
+lst_last.o/     0           0     0     644     1062      `
+!<arch>
+lst_last.c/     0           0     0     644     993       `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*lst_last(t_lst *lst)
+{
+	return ((void *)lst_get(lst, lst->_count - 1));
+}
+
+to_str.o/       0           0     0     644     1022      `
+!<arch>
+to_str.c/       0           0     0     644     953       `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_to_ptr.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:32:38 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/29 08:23:56 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+char	*to_str(void *p)
+{
+	return ((char *)p);
+}
+
+to_int.o/       0           0     0     644     1140      `
+!<arch>
+to_int.c/       0           0     0     644     1072      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_get_int.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:32:38 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/29 14:49:21 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+int32_t	to_int(void *p)
+{
+	return (*(int32_t *)p);
+}
+
+int32_t	*to_ints(void *p)
+{
+	return ((int32_t *)p);
+}
+
+uint32_t	to_uint(void *p)
+{
+	return (*(uint32_t *)p);
+}
+to_long.o/      0           0     0     644     1086      `
+!<arch>
+to_long.c/      0           0     0     644     1018      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_to_long.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:32:38 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/29 14:49:31 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+int64_t	to_long(void *p)
+{
+	return (*(int64_t *)p);
+}
+
+uint64_t	to_ulong(void *p)
+{
+	return (*(uint64_t *)p);
+}
+inc_ptr.o/      0           0     0     644     1152      `
+!<arch>
+inc_ptr.c/      0           0     0     644     1084      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_get_int.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:32:38 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/29 14:49:21 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+/// @brief increment pointer by x bytes
+/// @param p
+/// @param byte_size
+/// @return
+void	*inc_ptr(void *p, size_t byte_size)
+{
+	return ((void *)&((uint8_t *)p)[byte_size]);
+}
+params.o/       0           0     0     644     2934      `
+!<arch>
+params.c/       0           0     0     644     2865      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_set_char.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 12:32:38 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/29 14:51:05 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+/// @brief WARNING data should have been assigned by p_values(size_t) function.
+/// @param data
+/// @param val
+/// @return
+void	add_int(void *data, int32_t val)
+{
+	int32_t	*byte_index;
+
+	byte_index = &((int32_t *)data)[-1];
+	*((int32_t *)&((uint8_t *)data)[*byte_index]) = val;
+	*byte_index += sizeof(int32_t);
+}
+
+void	*p_values(size_t size)
+{
+	static uint8_t	*data[10000];
+	static int32_t	index;
+
+	index += size + sizeof(int32_t);
+	if (index >= 10000)
+	{
+		index = 0;
+		return (p_values(size));
+	}
+	*((int32_t *)data) = 0;
+	return ((void *)&data[index - size]);
+}
+
+void	*p_int(int32_t value)
+{
+	static int32_t	data[10];
+	static int32_t	index;
+
+	index++;
+	if (index >= 10)
+		index = 0;
+	data[index] = value;
+	return ((void *)&data[index]);
+}
+
+void	*p_int2(int32_t value, int32_t value2)
+{
+	static int32_t	data[2];
+
+	data[0] = value;
+	data[1] = value2;
+	return ((void *)&data[0]);
+}
+
+void	*p_uint(uint32_t value)
+{
+	static uint32_t	data[10];
+	static int32_t	index;
+
+	index++;
+	if (index >= 10)
+		index = 0;
+	data[index] = value;
+	return ((void *)&data[index]);
+}
+
+void	*p_ulong(uint64_t value)
+{
+	static uint64_t	data[10];
+	static int32_t	index;
+
+	index++;
+	if (index >= 10)
+		index = 0;
+	data[index] = value;
+	return ((void *)&data[index]);
+}
+
+void	*p_long(int64_t value)
+{
+	static int64_t	data[10];
+	static int32_t	index;
+
+	index++;
+	if (index >= 10)
+		index = 0;
+	data[index] = value;
+	return ((void *)&data[index]);
+}
+
+void	*p_short(int16_t value)
+{
+	static int16_t	data[10];
+	static int32_t	index;
+
+	index++;
+	if (index >= 10)
+		index = 0;
+	data[index] = value;
+	return ((void *)&data[index]);
+}
+
+void	*p_ushort(uint16_t value)
+{
+	static uint16_t	data[10];
+	static int32_t	index;
+
+	index++;
+	if (index >= 10)
+		index = 0;
+	data[index] = value;
+	return ((void *)&data[index]);
+}
+
+void	*p_bool(bool value)
+{
+	static bool		data[10];
+	static int32_t	index;
+
+	index++;
+	if (index >= 10)
+		index = 0;
+	data[index] = value;
+	return ((void *)&data[index]);
+}
+
+to_short.o/     0           0     0     644     1088      `
+!<arch>
+to_short.c/     0           0     0     644     1020      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_to_short.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:32:38 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/29 14:49:38 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+int16_t	to_short(void *p)
+{
+	return (*(int16_t *)p);
+}
+
+uint16_t	to_ushort(void *p)
+{
+	return (*(uint16_t *)p);
+}
+to_char.o/      0           0     0     644     1084      `
+!<arch>
+to_char.c/      0           0     0     644     1015      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_get_char.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:32:38 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/29 14:49:18 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../lst.h"
+
+int8_t	to_char(void *p)
+{
+	return (*(int8_t *)p);
+}
+
+uint8_t	to_uchar(void *p)
+{
+	return (*(uint8_t *)p);
+}
+
+/283            0           0     0     644     1898      `
+!<arch>
+//                                              18        `
+lst_filter_max.c/
+/0              0           0     0     644     1751      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief Find the item containing a max value.
+/// the function pointer compare both item and return the greatest one.
+void	*lst_filter_max(t_lst *lst, void *(*comparer)(void *item1, void *item2))
+{
+	int32_t	i;
+	void	*gr_item;
+
+	gr_item = lst_get(lst, 0);
+	i = 1;
+	while (i < lst->_count)
+	{
+		gr_item = comparer(gr_item, lst_get(lst, i));
+		i++;
+	}
+	return (gr_item);
+}
+
+/// @brief Find the item containing a max value.
+/// the comparer function return the largest item.
+int32_t	lst_filter_max_index(t_lst *lst, void *(*comparer)(void *first,
+			void *second))
+{
+	int32_t	i;
+	void	*gr;
+	void	*gr2;
+	int32_t	gr_i;
+
+	gr_i = 0;
+	i = 1;
+	if (lst->_count == 1)
+		return (0);
+	gr = lst_get(lst, 0);
+	while (i < lst->_count)
+	{
+		gr2 = lst_get(lst, i);
+		gr = comparer(gr, gr2);
+		if (gr2 == gr)
+			gr_i = i;
+		i++;
+	}
+	return (gr_i);
+}
+
+utils.o/        0           0     0     644     1250      `
+!<arch>
+utils.c/        0           0     0     644     1181      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 09:33:44 by math              #+#    #+#             */
+/*   Updated: 2023/02/12 09:34:13 by math             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*copy_temp(void *obj, size_t size_in_bytes)
+{
+	uint8_t *new_obj;
+	uint8_t *obj_byte;
+
+	obj_byte = (uint8_t *)obj;
+	new_obj = temp_pool(size_in_bytes);
+	while (size_in_bytes-- > 0)
+	{
+		new_obj[size_in_bytes] = obj_byte[size_in_bytes];
+	}
+	return ((void *)new_obj);
+}
+lst_replace.o/  0           0     0     644     1290      `
+!<arch>
+lst_replace.c/  0           0     0     644     1222      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_replace(t_lst *lst, int32_t index, void *ptr)
+{
+	uint8_t	*data;
+	int32_t	i;
+	uint8_t	*val;
+
+	val = (uint8_t *)ptr;
+	data = &lst->data[(lst->_count + lst->_offset - 1) * lst->_size];
+	i = (index + lst->_offset) * lst->_size;
+	while (i < lst->_size)
+	{
+		data[i] = *val++;
+		i++;
+	}
+	return (lst);
+}
+/301            0           0     0     644     1408      `
+!<arch>
+//                                              22        `
+lst_filter_get_nth.c/
+/0              0           0     0     644     1258      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*lst_filter_get_nth(t_lst *lst, bool (*conditions)(t_lst *lst,
+			int32_t index, void *values), void *values, int32_t nth_item)
+{
+	int32_t	i;
+	int32_t	count;
+
+	i = 0;
+	count = 0;
+	while (i < lst->_count)
+	{
+		if (conditions(lst, i, values))
+			count++;
+		if (nth_item == count)
+			return (lst_get(lst, i));
+		i++;
+	}
+	return ((void *)0);
+}
+/323            0           0     0     644     1422      `
+!<arch>
+//                                              18        `
+lst_filter_sum.c/
+/0              0           0     0     644     1276      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief Find the smallest item field
+/// Then return the item.
+/// @param lst
+/// @param start_index
+/// @param field_offset
+/// @param val
+/// @return
+int64_t	lst_filter_sum(t_lst *lst, int64_t (*select)(t_lst *lst, int32_t index))
+{
+	int32_t	i;
+	int64_t	sum;
+
+	i = 0;
+	sum = 0;
+	while (i < lst->_count)
+	{
+		sum += select(lst, i);
+		i++;
+	}
+	return (sum);
+}
+/341            0           0     0     644     1630      `
+!<arch>
+//                                              26        `
+lst_int_to_bool_array.c/
+
+/0              0           0     0     644     1476      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief an array of bool where the value is the index. useful to check if number is in the array,
+///	WARNING max number should be small.
+/// @param lst
+/// @return
+bool	*lst_int_to_bool_array(t_lst *lst, int32_t len, bool reverse)
+{
+	bool	*arr;
+	int32_t	i;
+	bool	val;
+	bool	def;
+
+	val = true;
+	def = false;
+	if (!lst)
+		return (NULL);
+	arr = (bool *)temp_pool(lst->_count * sizeof(bool));
+	if (reverse)
+	{
+		val = false;
+		def = true;
+	}
+	i = 0;
+	while (i < len)
+		arr[i++] = def;
+	while (i < lst->_count)
+		arr[lst_get_int(lst, i++)] = val;
+	return (arr);
+}
+/366            0           0     0     644     1442      `
+!<arch>
+//                                              20        `
+lst_filter_count.c/
+/0              0           0     0     644     1294      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief Find the item containing a max value.
+/// the function pointer compare both item and return the greatest one.
+int32_t	lst_filter_count(t_lst *lst, bool (*filter)(void *item1, void *values),
+		void *values)
+{
+	int32_t	i;
+	int32_t	count;
+
+	i = 0;
+	count = 0;
+	while (i < lst->_count)
+	{
+		if (filter(lst_get(lst, i), values))
+			count++;
+		i++;
+	}
+	return (count);
+}
+lst_free.o/     0           0     0     644     1300      `
+!<arch>
+lst_free.c/     0           0     0     644     1231      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*lst_free(t_lst *lst)
+{
+	if (!lst)
+		return (NULL);
+	if (!lst->data)
+		return (free(lst), NULL);
+	free(lst->data);
+	free(lst);
+	return (NULL);
+}
+
+int32_t	*lst_free_func(t_lst *lst,
+						void (*delete)(t_lst *lst))
+{
+	(*delete)(lst);
+	if (lst && lst->data)
+		free(lst->data);
+	if (lst)
+		free(lst);
+	return (NULL);
+}
+lst_swap.o/     0           0     0     644     1530      `
+!<arch>
+lst_swap.c/     0           0     0     644     1461      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief WARNING,  the second index should be the biggest one.
+/// @param lst
+/// @param index
+/// @param index2
+/// @param elem_count
+void	lst_swap(t_lst *lst, int32_t index, int32_t index2, int32_t elem_count)
+{
+	int32_t	i;
+	int32_t	i2;
+	int32_t	max;
+	int8_t	temp;
+
+	if (index2 == index)
+		return ;
+	i = (index + lst->_offset) * lst->_size;
+	i2 = (index2 + lst->_offset) * lst->_size;
+	max = i2 + (elem_count * lst->_size);
+	while (i2 < max)
+	{
+		temp = lst->data[i];
+		lst->data[i] = lst->data[i2];
+		lst->data[i2] = temp;
+		i++;
+		i2++;
+	}
+}
+
+/386            0           0     0     644     1644      `
+!<arch>
+//                                              18        `
+ft_substr_temp.c/
+/0              0           0     0     644     1497      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr_temp.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
+/*   Updated: 2022/12/09 12:15:17 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+static size_t	ft_size(char const *s, unsigned int start, size_t len)
+{
+	size_t	s_l;
+	size_t	size;
+
+	s_l = ft_strlen(s);
+	if (start >= s_l)
+		size = 1;
+	else if (start + len <= s_l)
+		size = len + 1;
+	else
+		size = s_l - start + 1;
+	return (size);
+}
+
+char	*ft_substr_temp(char const *s, unsigned int start, size_t len)
+{
+	char	*mem;
+	size_t	i;
+	size_t	size;
+
+	if (!s)
+		return (0);
+	size = ft_size(s, start, len);
+	mem = (char *)temp_pool(sizeof(char) * size);
+	i = 0;
+	while (i < (size - 1) && s[i + start] != '\0')
+	{
+		mem[i] = s[i + start];
+		i++;
+	}
+	mem[i] = '\0';
+	return (mem);
+}
+
+lst_add.o/      0           0     0     644     1942      `
+!<arch>
+lst_add.c/      0           0     0     644     1873      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_add(t_lst *lst, void *value)
+{
+	if (!lst)
+		return (NULL);
+	if (lst->_capacity <= lst->_count + 10)
+		_internal_resize(lst, 1);
+	else if (lst->_offset + lst->_count + 1 >= lst->_capacity)
+	{
+		ft_memmove(_lst_addr_mid(lst, -1), lst_addr(lst, 0), lst->_count
+				* lst->_size);
+		lst->_offset = _lst_offset_mid(lst, -1);
+	}
+	*lst_addr_ptr(lst, lst->_count) = value;
+	lst->_count++;
+	return (lst);
+}
+
+t_lst	*lst_add_int(t_lst *lst, int32_t value)
+{
+	int32_t	*lst_data;
+
+	if (!lst)
+		return (NULL);
+	if (lst->_capacity <= lst->_count + 10)
+		_internal_resize(lst, 1);
+	if (lst->_capacity <= lst->_count + 10 && lst->_is_static)
+		_internal_resize(lst, 1);
+	else if (lst->_offset + lst->_count + 1 >= lst->_capacity)
+	{
+		ft_memmove(_lst_addr_mid(lst, -1), lst_addr(lst, 0), lst->_count
+				* lst->_size);
+		lst->_offset = _lst_offset_mid(lst, -1);
+	}
+	lst_data = lst_addr_int_ptr(lst, lst->_count);
+	*lst_data = value;
+	lst->_count++;
+	return (lst);
+}
+
+/404            0           0     0     644     1940      `
+!<arch>
+//                                              22        `
+lst_sequence_equal.c/
+/0              0           0     0     644     1789      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief for comparing sequences are equals, for pointer type.
+/// @return
+bool	lst_sequence_equal_ptr(t_lst *lst,
+							bool (*comparer)(t_lst *lst, int32_t index,
+									t_lst *to_compare),
+							t_lst *to_compare)
+{
+	int32_t	i;
+
+	i = 0;
+	if (lst->_count != to_compare->_count)
+		return (false);
+	while (i < lst->_count && i < to_compare->_count)
+	{
+		if (!comparer(lst, i, to_compare))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool	lst_sequence_equal(t_lst *lst, t_lst *to_compare)
+{
+	int32_t	i;
+	int32_t	j;
+	uint8_t	*dat1;
+	uint8_t	*dat2;
+
+	i = 0;
+	j = 0;
+	if (lst->_count != to_compare->_count)
+		return (false);
+	while (i < lst->_count && i < to_compare->_count)
+	{
+		dat1 = lst_data(lst, i);
+		dat2 = lst_data(to_compare, i);
+		j = 0;
+		while (j < lst->_size)
+		{
+			if (dat1[j] != dat2[j])
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
+}
+
+lst_filter.o/   0           0     0     644     1944      `
+!<arch>
+lst_filter.c/   0           0     0     644     1876      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// data will be returned in a temp lst pool.
+/// if pointer returned by function pointer is NULL then item is not inserted
+/// @param lst
+/// @param start_index
+/// @param field_offset
+/// @param val
+/// @return
+t_lst	*lst_filter(t_lst *lst, bool (*match_item)(void *item, void *values),
+		void *values)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+	void	*item;
+
+	i = 0;
+	new_lst = lst_new_temp(lst->_count, lst->_size);
+	while (i < lst->_count)
+	{
+		item = lst_get(lst, i);
+		if (match_item(item, values))
+			lst_add(new_lst, item);
+		i++;
+	}
+	return (new_lst);
+}
+
+t_lst	*lst_filter_is_any_of(t_lst *lst, bool (*match_item)(t_lst *lst,
+			int32_t index, void *values, int32_t count), void *values,
+		int32_t count)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+
+	i = 0;
+	new_lst = lst_new_temp(lst->_count, lst->_size);
+	if (!new_lst)
+		return (NULL);
+	while (i < lst->_count)
+	{
+		if (match_item(lst, i, values, count))
+			lst_add(new_lst, lst_get(lst, i));
+		i++;
+	}
+	return (new_lst);
+}
+/426            0           0     0     644     1530      `
+!<arch>
+//                                              22        `
+lst_filter_exclude.c/
+/0              0           0     0     644     1380      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief
+/// @param lst
+/// @param exclude_indices
+/// @return
+t_lst	*lst_filter_exclude(t_lst *lst, t_lst *exclude_indices)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+	bool	*exclude;
+
+	exclude = lst_int_to_bool_array(exclude_indices, exclude_indices->_count,
+			false);
+	new_lst = lst_new_temp(lst->_count, lst->_size);
+	if (!new_lst)
+		return (NULL);
+	i = 0;
+	while (i < lst->_count)
+	{
+		if (!exclude[i])
+			lst_add(new_lst, lst_get(lst, i++));
+	}
+	return (new_lst);
+}
+/448            0           0     0     644     1586      `
+!<arch>
+//                                              20        `
+lst_filter_range.c/
+/0              0           0     0     644     1437      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// data will be returned in a temp lst pool.
+/// if pointer returned by function pointer is NULL then item is not inserted
+/// @param lst
+/// @param start_index
+/// @param field_offset
+/// @param val
+/// @return
+t_lst	*lst_filter_range(t_lst *lst, int32_t start_index, int32_t count)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+
+	i = start_index;
+	new_lst = lst_new_temp(count, lst->_size);
+	count += start_index;
+	while (i < lst->_count && i < count)
+	{
+		lst_add(new_lst, (void *)lst_get(lst, i));
+		i++;
+	}
+	return (new_lst);
+}
+
+lst_firts.o/    0           0     0     644     1054      `
+!<arch>
+lst_firts.c/    0           0     0     644     985       `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*lst_first(t_lst *lst)
+{
+	return ((void *)lst_get(lst, 0));
+}
+
+lst_new_item.o/ 0           0     0     644     1214      `
+!<arch>
+lst_new_item.c/ 0           0     0     644     1146      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief create a new item from static buffer.
+/// @param data
+/// @param
+/// @return
+void	*lst_new_item(void *static_data, int32_t index, size_t size_of_elem)
+{
+	return ((void *)&((uint8_t *)static_data)[index * size_of_elem]);
+}
+lst_remove.o/   0           0     0     644     1654      `
+!<arch>
+lst_remove.c/   0           0     0     644     1585      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_remove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/12/12 09:25:16 by mroy              #+#    #+#             */
+/*   Updated: 2022/12/12 09:25:16 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_remove_at(t_lst *lst, int32_t index)
+{
+	if (!lst)
+		return (NULL);
+	if (index == 0)
+		lst->_offset++;
+	else
+	{
+		ft_memmove(&lst->data[(index + lst->_offset) * lst->_size],
+					&(lst->data)[((lst->_offset + index + 1) * lst->_size)],
+					(lst->_count - index - 1) * lst->_size);
+	}
+	lst->_count--;
+	return (lst);
+}
+
+t_lst	*lst_remove_at_end(t_lst *lst, int32_t count)
+{
+	if (!lst)
+		return (NULL);
+	lst->_count -= count;
+	return (lst);
+}
+
+t_lst	*lst_remove_last(t_lst *lst)
+{
+	if (!lst)
+		return (NULL);
+	lst->_count--;
+	return (lst);
+}
+
+t_lst	*lst_remove_first(t_lst *lst)
+{
+	if (!lst)
+		return (NULL);
+	lst->_offset++;
+	lst->_count--;
+	return (lst);
+}
+
+/468            0           0     0     644     1372      `
+!<arch>
+//                                              22        `
+ft_split_many_temp.c/
+/0              0           0     0     644     1221      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split_many_temp.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/03 10:03:57 by math              #+#    #+#             */
+/*   Updated: 2023/02/08 10:55:02 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+char	**ft_split_many_temp(char *s, char *separators)
+{
+	char	sep;
+	int		i;
+	int		s_i;
+
+	sep = separators[0];
+	separators++;
+	s_i = 0;
+	while (separators[s_i])
+	{
+		i = 0;
+		while (s[i])
+		{
+			if (s[i] == separators[s_i])
+				s[i] = sep;
+			i++;
+		}
+		s_i++;
+	}
+	return (ft_split_temp((const char *)s, sep));
+}
+
+/490            0           0     0     644     1344      `
+!<arch>
+//                                              20        `
+lst_filter_first.c/
+/0              0           0     0     644     1195      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*lst_filter_first(t_lst *lst,
+						bool (*conditions)(t_lst *lst, int32_t index,
+								void *values),
+						void *values)
+{
+	int32_t	i;
+
+	i = 0;
+	while (i < lst->_count)
+	{
+		if (conditions(lst, i, values))
+			return (lst_get(lst, i));
+		i++;
+	}
+	return ((void *)0);
+}
+
+/510            0           0     0     644     1394      `
+!<arch>
+//                                              22        `
+lst_get_alloc_size.c/
+/0              0           0     0     644     1244      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief the full alloc sized if _is_static : (_capacity * _size)
+///	+ sizeof(t_lst)
+/// or the (_capacity * _size) if not static
+/// @param lst
+/// @return
+int32_t	lst_get_alloc_size(t_lst *lst)
+{
+	if (lst->_is_static)
+		return ((lst->_capacity * lst->_size) + sizeof(t_lst));
+	else
+		return ((lst->_capacity * lst->_size));
+}
+/532            0           0     0     644     1604      `
+!<arch>
+//                                              26        `
+_lst_group_by_internal.c/
+/0              0           0     0     644     1449      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_group_by	*_internal_group_by_resize_temp(t_group_by *grp,
+											int32_t group_count_to_add)
+{
+	t_lst **old_data;
+	int32_t new_length;
+
+	new_length = grp->_array_length * 2;
+	old_data = grp->data;
+	while (new_length <= grp->_group_count + group_count_to_add)
+		new_length *= 2;
+	grp->data = group_by_data_pool(new_length * sizeof(t_lst *));
+	ft_memcpy(grp->data,
+				old_data,
+				grp->_group_count * sizeof(t_lst *));
+	grp->_array_length = new_length;
+	grp->_group_count = grp->_group_count + group_count_to_add;
+	return (grp);
+}
+lst_reverse.o/  0           0     0     644     1686      `
+!<arch>
+lst_reverse.c/  0           0     0     644     1617      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_rev_to_lst_fixed(t_lst *lst)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+
+	new_lst = lst_new_fixed(lst->_count, sizeof(void *));
+	i = lst->_count - 1;
+	while (i >= 0)
+	{
+		lst_add(new_lst, lst_get(lst, i));
+		i--;
+	}
+	return (new_lst);
+}
+
+t_lst	*lst_reverse(t_lst *lst)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+
+	new_lst = lst_new_temp(lst->_count, sizeof(void *));
+	i = lst->_count - 1;
+	while (i >= 0)
+	{
+		lst_add(new_lst, lst_get(lst, i));
+		i--;
+	}
+	return (new_lst);
+}
+
+t_lst	*lst_reverse_int(t_lst *lst)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+
+	new_lst = lst_new_temp(lst->_count, sizeof(int));
+	i = lst->_count - 1;
+	while (i >= 0)
+	{
+		lst_add_int(new_lst, lst_get_int(lst, i));
+		i--;
+	}
+	return (new_lst);
+}
+
+lst_rotate.o/   0           0     0     644     2260      `
+!<arch>
+lst_rotate.c/   0           0     0     644     2192      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_rotate_left(t_lst *lst, int32_t elem_count)
+{
+	int32_t	new_offset;
+
+	if (!lst)
+		return (NULL);
+	if (lst->_capacity <= lst->_count + (elem_count * 2) + 10)
+		_internal_resize(lst, elem_count);
+	new_offset = lst->_offset + elem_count;
+	if (lst->_count + lst->_offset + elem_count >= lst->_capacity)
+	{
+		new_offset = _lst_offset_mid(lst, -elem_count);
+		ft_memmove(_lst_addr_offset(lst, new_offset), lst_addr(lst, 0),
+				lst->_count * lst->_size);
+		lst->_offset = new_offset;
+		new_offset += 1;
+	}
+	ft_memmove(lst_addr(lst, lst->_count), lst_addr(lst, 0), elem_count
+			* lst->_size);
+	lst->_offset = new_offset;
+	return (lst);
+}
+
+t_lst	*lst_rotate_right(t_lst *lst, int32_t elem_count)
+{
+	int32_t	new_offset;
+
+	if (!lst)
+		return (NULL);
+	if (lst->_capacity <= lst->_count + (elem_count * 2) + 10)
+		_internal_resize(lst, elem_count);
+	new_offset = lst->_offset - elem_count;
+	if (new_offset < 0)
+	{
+		new_offset = _lst_offset_mid(lst, elem_count);
+		ft_memmove(_lst_addr_offset(lst, new_offset), lst_addr(lst, 0),
+				lst->_count * lst->_size);
+		lst->_offset = new_offset - elem_count;
+		new_offset -= 1;
+	}
+	ft_memmove(lst_addr(lst, -elem_count), lst_addr(lst, lst->_count
+				- elem_count), elem_count * lst->_size);
+	lst->_offset = new_offset;
+	return (lst);
+}
+lst_hashset.o/  0           0     0     644     7852      `
+!<arch>
+lst_hashset.c/  0           0     0     644     7783      `
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// #define CAPACITY 50000 // Size of the Hash Table
+
+// unsigned long	hash_function(char *str)
+// {
+// 	unsigned long	i;
+
+// 	i = 0;
+// 	for (int j = 0; str[j]; j++)
+// 		i += str[j];
+// 	return (i % CAPACITY);
+// }
+
+// typedef struct Ht_item		Ht_item;
+
+// // Define the Hash Table Item here
+// struct						Ht_item
+// {
+// 	char					*key;
+// 	char					*value;
+// };
+
+// typedef struct LinkedList	LinkedList;
+
+// // Define the Linkedlist here
+// struct						LinkedList
+// {
+// 	Ht_item					*item;
+// 	LinkedList				*next;
+// };
+
+// typedef struct HashTable	HashTable;
+
+// // Define the Hash Table here
+// struct						HashTable
+// {
+// 	// Contains an array of pointers
+// 	// to items
+// 	Ht_item					**items;
+// 	LinkedList				**overflow_buckets;
+// 	int						size;
+// 	int						count;
+// };
+
+// static LinkedList	*allocate_list(void)
+// {
+// 	LinkedList	*list;
+
+// 	// Allocates memory for a Linkedlist pointer
+// 	list = (LinkedList *)malloc(sizeof(LinkedList));
+// 	return (list);
+// }
+
+// static LinkedList	*linkedlist_insert(LinkedList *list, Ht_item *item)
+// {
+// 	LinkedList	*head;
+// 	LinkedList	*node;
+// 	LinkedList	*temp;
+// 	LinkedList	*node;
+
+// 	// Inserts the item onto the Linked List
+// 	if (!list)
+// 	{
+// 		head = allocate_list();
+// 		head->item = item;
+// 		head->next = NULL;
+// 		list = head;
+// 		return (list);
+// 	}
+// 	else if (list->next == NULL)
+// 	{
+// 		node = allocate_list();
+// 		node->item = item;
+// 		node->next = NULL;
+// 		list->next = node;
+// 		return (list);
+// 	}
+// 	temp = list;
+// 	while (temp->next->next)
+// 	{
+// 		temp = temp->next;
+// 	}
+// 	node = allocate_list();
+// 	node->item = item;
+// 	node->next = NULL;
+// 	temp->next = node;
+// 	return (list);
+// }
+
+// static Ht_item	*linkedlist_remove(LinkedList *list)
+// {
+// 	LinkedList	*node;
+// 	LinkedList	*temp;
+// 	Ht_item		*it;
+
+// 	// Removes the head from the linked list
+// 	// and returns the item of the popped element
+// 	if (!list)
+// 		return (NULL);
+// 	if (!list->next)
+// 		return (NULL);
+// 	node = list->next;
+// 	temp = list;
+// 	temp->next = NULL;
+// 	list = node;
+// 	it = NULL;
+// 	memcpy(temp->item, it, sizeof(Ht_item));
+// 	free(temp->item->key);
+// 	free(temp->item->value);
+// 	free(temp->item);
+// 	free(temp);
+// 	return (it);
+// }
+
+// static void	free_linkedlist(LinkedList *list)
+// {
+// 	LinkedList	*temp;
+
+// 	temp = list;
+// 	while (list)
+// 	{
+// 		temp = list;
+// 		list = list->next;
+// 		free(temp->item->key);
+// 		free(temp->item->value);
+// 		free(temp->item);
+// 		free(temp);
+// 	}
+// }
+
+// static LinkedList	**create_overflow_buckets(HashTable *table)
+// {
+// 	LinkedList	**buckets;
+
+// 	// Create the overflow buckets; an array of linkedlists
+// 	buckets = (LinkedList **)calloc(table->size, sizeof(LinkedList *));
+// 	for (int i = 0; i < table->size; i++)
+// 		buckets[i] = NULL;
+// 	return (buckets);
+// }
+
+// static void	free_overflow_buckets(HashTable *table)
+// {
+// 	LinkedList	**buckets;
+
+// 	// Free all the overflow bucket lists
+// 	buckets = table->overflow_buckets;
+// 	for (int i = 0; i < table->size; i++)
+// 		free_linkedlist(buckets[i]);
+// 	free(buckets);
+// }
+
+// Ht_item	*create_item(char *key, char *value)
+// {
+// 	Ht_item	*item;
+
+// 	// Creates a pointer to a new hash table item
+// 	item = (Ht_item *)malloc(sizeof(Ht_item));
+// 	item->key = (char *)malloc(strlen(key) + 1);
+// 	item->value = (char *)malloc(strlen(value) + 1);
+// 	strcpy(item->key, key);
+// 	strcpy(item->value, value);
+// 	return (item);
+// }
+
+// HashTable	*create_table(int size)
+// {
+// 	HashTable	*table;
+
+// 	// Creates a new HashTable
+// 	table = (HashTable *)malloc(sizeof(HashTable));
+// 	table->size = size;
+// 	table->count = 0;
+// 	table->items = (Ht_item **)calloc(table->size, sizeof(Ht_item *));
+// 	for (int i = 0; i < table->size; i++)
+// 		table->items[i] = NULL;
+// 	table->overflow_buckets = create_overflow_buckets(table);
+// 	return (table);
+// }
+
+// void	free_item(Ht_item *item)
+// {
+// 	// Frees an item
+// 	free(item->key);
+// 	free(item->value);
+// 	free(item);
+// }
+
+// void	free_table(HashTable *table)
+// {
+// 	Ht_item	*item;
+
+// 	// Frees the table
+// 	for (int i = 0; i < table->size; i++)
+// 	{
+// 		item = table->items[i];
+// 		if (item != NULL)
+// 			free_item(item);
+// 	}
+// 	free_overflow_buckets(table);
+// 	free(table->items);
+// 	free(table);
+// }
+
+// void	handle_collision(HashTable *table, unsigned long index, Ht_item *item)
+// {
+// 	LinkedList	*head;
+
+// 	head = table->overflow_buckets[index];
+// 	if (head == NULL)
+// 	{
+// 		// We need to create the list
+// 		head = allocate_list();
+// 		head->item = item;
+// 		table->overflow_buckets[index] = head;
+// 		return ;
+// 	}
+// 	else
+// 	{
+// 		// Insert to the list
+// 		table->overflow_buckets[index] = linkedlist_insert(head, item);
+// 		return ;
+// 	}
+// }
+
+// void	ht_insert(HashTable *table, char *key, char *value)
+// {
+// 	Ht_item			*item;
+// 	unsigned long	index;
+// 	Ht_item			*current_item;
+
+// 	// Create the item
+// 	item = create_item(key, value);
+// 	// Compute the index
+// 	index = hash_function(key);
+// 	current_item = table->items[index];
+// 	if (current_item == NULL)
+// 	{
+// 		// Key does not exist.
+// 		if (table->count == table->size)
+// 		{
+// 			// Hash Table Full
+// 			printf("Insert Error: Hash Table is full\n");
+// 			// Remove the create item
+// 			free_item(item);
+// 			return ;
+// 		}
+// 		// Insert directly
+// 		table->items[index] = item;
+// 		table->count++;
+// 	}
+// 	else
+// 	{
+// 		// Scenario 1: We only need to update value
+// 		if (strcmp(current_item->key, key) == 0)
+// 		{
+// 			strcpy(table->items[index]->value, value);
+// 			return ;
+// 		}
+// 		else
+// 		{
+// 			// Scenario 2: Collision
+// 			handle_collision(table, index, item);
+// 			return ;
+// 		}
+// 	}
+// }
+
+// char	*ht_search(HashTable *table, char *key)
+// {
+// 	int			index;
+// 	Ht_item		*item;
+// 	LinkedList	*head;
+
+// 	// Searches the key in the hashtable
+// 	// and returns NULL if it doesn't exist
+// 	index = hash_function(key);
+// 	item = table->items[index];
+// 	head = table->overflow_buckets[index];
+// 	// Ensure that we move to items which are not NULL
+// 	while (item != NULL)
+// 	{
+// 		if (strcmp(item->key, key) == 0)
+// 			return (item->value);
+// 		if (head == NULL)
+// 			return (NULL);
+// 		item = head->item;
+// 		head = head->next;
+// 	}
+// 	return (NULL);
+// }
+
+// void	print_search(HashTable *table, char *key)
+// {
+// 	char	*val;
+
+// 	if ((val = ht_search(table, key)) == NULL)
+// 	{
+// 		printf("%s does not exist\n", key);
+// 		return ;
+// 	}
+// 	else
+// 	{
+// 		printf("Key:%s, Value:%s\n", key, val);
+// 	}
+// }
+
+// void	print_table(HashTable *table)
+// {
+// 	LinkedList	*head;
+
+// 	printf("\n-------------------\n");
+// 	for (int i = 0; i < table->size; i++)
+// 	{
+// 		if (table->items[i])
+// 		{
+// 			printf("Index:%d, Key:%s, Value:%s", i, table->items[i]->key,
+// 					table->items[i]->value);
+// 			if (table->overflow_buckets[i])
+// 			{
+// 				printf(" => Overflow Bucket => ");
+// 				head = table->overflow_buckets[i];
+// 				while (head)
+// 				{
+// 					printf("Key:%s, Value:%s ", head->item->key,
+// 							head->item->value);
+// 					head = head->next;
+// 				}
+// 			}
+// 			printf("\n");
+// 		}
+// 	}
+// 	printf("-------------------\n");
+// }
+
+// // int	main(void)
+// // {
+// // 	HashTable *ht = create_table(CAPACITY);
+// // 	ht_insert(ht, "1", "First address");
+// // 	ht_insert(ht, "2", "Second address");
+// // 	ht_insert(ht, "Hel", "Third address");
+// // 	ht_insert(ht, "Cau", "Fourth address");
+// // 	print_search(ht, "1");
+// // 	print_search(ht, "2");
+// // 	print_search(ht, "3");
+// // 	print_search(ht, "Hel");
+// // 	print_search(ht, "Cau");
+// // 	print_table(ht);
+// // 	free_table(ht);
+// // 	return (0);
+// // }
+lst_to_array.o/ 0           0     0     644     2930      `
+!<arch>
+lst_to_array.c/ 0           0     0     644     2861      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*lst_to_array(t_lst *lst)
+{
+	uint8_t	*arr;
+
+	if (!lst)
+		return (NULL);
+	arr = malloc(lst->_count * lst->_size);
+	if (!arr)
+		return (NULL);
+	ft_memcpy(arr, &lst->data[lst->_offset * lst->_size], lst->_count
+			* lst->_size);
+	return ((void *)arr);
+}
+
+/// @brief from memory pool make sure enought memory available
+/// @param lst
+/// @return
+void	*lst_to_array_fixed(t_lst *lst)
+{
+	uint8_t	*arr;
+
+	if (!lst)
+		return (NULL);
+	arr = mem_pool(lst->_count * lst->_size);
+	ft_memcpy(arr, &lst->data[lst->_offset * lst->_size], lst->_count
+			* lst->_size);
+	return ((void *)arr);
+}
+
+/// @brief temp data only
+/// @param lst
+/// @return
+int32_t	*lst_to_int_array_temp(t_lst *lst)
+{
+	uint8_t	*arr;
+
+	if (!lst)
+		return (NULL);
+	arr = temp_pool(lst->_count * lst->_size);
+	ft_memcpy(arr, &lst->data[lst->_offset * lst->_size], lst->_count
+			* lst->_size);
+	return ((int32_t *)arr);
+}
+
+/// @brief temp data only
+/// @param lst
+/// @return
+void	*lst_to_array_temp(t_lst *lst)
+{
+	uint8_t	*arr;
+
+	if (!lst)
+		return (NULL);
+	arr = temp_pool(lst->_count * lst->_size);
+	ft_memcpy(arr, &lst->data[lst->_offset * lst->_size], lst->_count
+			* lst->_size);
+	return ((void *)arr);
+}
+
+/// @brief temp data only
+/// @param lst
+/// @return
+void	*lst_to_array_static(t_lst *lst, void *dst)
+{
+	if (!lst)
+		return (NULL);
+	ft_memcpy(dst, &lst->data[lst->_offset * lst->_size], lst->_count
+			* lst->_size);
+	return ((void *)dst);
+}
+
+/// @brief get the internal array of the list.
+/// WARNING never modify the array, it's a readonly array.
+/// @param lst
+/// @return
+const void	*lst_get_array(t_lst *lst)
+{
+	if (!lst)
+		return (NULL);
+	return ((void *)&lst->data[lst->_offset * lst->_size]);
+}
+
+/// @brief get the internal array of the list.
+/// WARNING never modify the array, it's a readonly array.
+/// @param lst
+/// @return
+const int32_t	*lst_get_int_array(t_lst *lst)
+{
+	if (!lst)
+		return (NULL);
+	return ((int32_t *)&lst->data[lst->_offset * lst->_size]);
+}
+
+/558            0           0     0     644     1802      `
+!<arch>
+//                                              18        `
+lst_filter_min.c/
+/0              0           0     0     644     1656      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief Find the smallest item field
+/// Then return the item.
+/// comparer function should always return the smallest of the two item prev and
+/// current
+/// @param lst
+/// @param start_index
+/// @param field_offset
+/// @param val
+/// @return
+void	*lst_filter_min(t_lst *lst, int32_t (*comparer)(t_lst *lst,
+			int32_t index, int32_t prev))
+{
+	int32_t	i;
+	int32_t	sm;
+
+	sm = 0;
+	i = 1;
+	while (i < lst->_count)
+	{
+		sm = comparer(lst, i, sm);
+		i++;
+	}
+	return (lst_get(lst, sm));
+}
+
+int32_t	lst_filter_min_index(t_lst *lst,
+								int32_t (*comparer)(t_lst *lst, int32_t index,
+										int32_t prev))
+{
+	int32_t	i;
+	int32_t	sm;
+
+	sm = 0;
+	i = 1;
+	while (i < lst->_count)
+	{
+		sm = comparer(lst, i, sm);
+		i++;
+	}
+	return (sm);
+}
+memory_pool.o/  0           0     0     644     2638      `
+!<arch>
+memory_pool.c/  0           0     0     644     2570      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_params_init.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:32:38 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/29 14:50:37 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief using this data for temporary data.
+/// it is a pool of memory, no need to malloc data if it is temporary.
+/// warning do not use for storing long live data,
+///	only for temp data manipulation.
+/// @return
+uint8_t	*temp_pool(int32_t size_in_bytes)
+{
+	static uint8_t	temp[TEMP_DATA_SIZE];
+	static int32_t	index;
+	int32_t			i;
+
+	index += size_in_bytes;
+	if (index > TEMP_DATA_SIZE)
+		index = size_in_bytes;
+	i = index - size_in_bytes;
+	while (i < index)
+	{
+		temp[i] = 0;
+		i++;
+	}
+	return (&temp[index - size_in_bytes]);
+}
+
+uint8_t	*temp_sort_pool(int32_t size_in_bytes)
+{
+	static uint8_t	temp[TEMP_SORT_DATA];
+	static int32_t	index;
+	int32_t			i;
+
+	index += size_in_bytes;
+	if (index > TEMP_SORT_DATA)
+		index = size_in_bytes;
+	i = index - size_in_bytes;
+	while (i < index)
+	{
+		temp[i] = 0;
+		i++;
+	}
+	return (&temp[index - size_in_bytes]);
+}
+
+uint8_t	*mem_pool(int32_t size_in_bytes)
+{
+	static uint8_t	fixed[FIXED_DATA_SIZE];
+	static int32_t	index;
+	const char		*err;
+
+	err = "Error: You should allocate more memory to the fixed pool\n";
+	index += size_in_bytes;
+	if (index > FIXED_DATA_SIZE)
+	{
+		write(STDERR_FILENO, err, 58);
+		exit(EXIT_FAILURE);
+	}
+	return (&fixed[index - size_in_bytes]);
+}
+
+t_group_by	*group_by_clause_pool(void)
+{
+	static t_group_by	temp[TEMP_MAX_GROUP_BY_CLAUSES];
+	static int32_t		index;
+
+	index++;
+	if (index > TEMP_MAX_GROUP_BY_CLAUSES)
+		index = 0;
+	return (&temp[index]);
+}
+
+t_lst	**group_by_data_pool(int32_t num_of_group)
+{
+	static t_lst	*data[TEMP_MAX_GROUP_BY_DATA];
+	static int32_t	index;
+
+	index += num_of_group;
+	if (index > TEMP_MAX_GROUP_BY_DATA)
+		index = num_of_group;
+	return (&data[index - num_of_group]);
+}
+lst_get.o/      0           0     0     644     1902      `
+!<arch>
+lst_get.c/      0           0     0     644     1833      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+void	*lst_get(t_lst *lst, int32_t index)
+{
+	if (index >= lst->_count || index < 0)
+		exit(139);
+	return (*(void **)(&(lst->data[(index + lst->_offset) * lst->_size])));
+}
+
+void	**lst_addr_ptr(t_lst *lst, int32_t index)
+{
+	return ((void **)(&(lst->data[(index + lst->_offset) * lst->_size])));
+}
+
+/// @brief get the addresse at the index.
+/// @param lst
+/// @param index
+/// @return
+void	*lst_addr(t_lst *lst, int32_t index)
+{
+	return ((void *)(&(lst->data[(index + lst->_offset) * lst->_size])));
+}
+
+uint8_t	*lst_data(t_lst *lst, int32_t index)
+{
+	return (&lst->data[(lst->_offset + index) * lst->_size]);
+}
+
+int32_t	lst_get_int(t_lst *lst, int32_t index)
+{
+	if (index >= lst->_count || index < 0)
+		exit(139);
+	return (*(int32_t *)(&(lst->data[(index + lst->_offset) * lst->_size])));
+}
+
+int32_t	*lst_addr_int_ptr(t_lst *lst, int32_t index)
+{
+	return ((int32_t *)(&(lst->data[(index + lst->_offset) * lst->_size])));
+}
+
+/576            0           0     0     644     1152      `
+!<arch>
+//                                              20        `
+lst_group_by_get.c/
+/0              0           0     0     644     1004      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_group_by_get_at(t_group_by *grp, int32_t index)
+{
+	return (grp->data[index]);
+}
+lst_copy.o/     0           0     0     644     2898      `
+!<arch>
+lst_copy.c/     0           0     0     644     2830      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_lst	*lst_copy_data(t_lst *src, t_lst *dst)
+{
+	if (!src || !dst)
+		return (NULL);
+	dst->_offset = dst->_capacity / 3;
+	dst->_count = src->_count;
+	ft_memcpy(&dst->data[dst->_offset * dst->_size],
+				&src->data[src->_offset * src->_size],
+				src->_count * src->_size);
+	return (dst);
+}
+
+t_lst	*lst_copy(t_lst *lst)
+{
+	t_lst	*new_lst;
+
+	if (!lst)
+		return (NULL);
+	new_lst = lst_new(lst->_count, lst->_size);
+	if (!new_lst)
+		return (NULL);
+	ft_memcpy(&new_lst->data[new_lst->_offset * new_lst->_size],
+				&lst->data[lst->_offset * lst->_size],
+				lst->_count * lst->_size);
+	new_lst->_count = lst->_count;
+	return (new_lst);
+}
+
+t_lst	*lst_copy_fixed(t_lst *lst)
+{
+	t_lst	*new_lst;
+
+	if (!lst)
+		return (NULL);
+	new_lst = lst_new_fixed(lst->_count, lst->_size);
+	if (!new_lst)
+		return (NULL);
+	ft_memcpy(&new_lst->data[new_lst->_offset * new_lst->_size],
+				&lst->data[lst->_offset * lst->_size],
+				lst->_count * lst->_size);
+	new_lst->_count = lst->_count;
+	return (new_lst);
+}
+
+t_lst	*lst_copy_temp(t_lst *lst)
+{
+	t_lst	*new_lst;
+
+	if (!lst)
+		return (NULL);
+	new_lst = lst_new_temp(lst->_count, lst->_size);
+	if (!new_lst)
+		return (NULL);
+	ft_memcpy(&new_lst->data[new_lst->_offset * new_lst->_size],
+				&lst->data[lst->_offset * lst->_size],
+				lst->_count * lst->_size);
+	new_lst->_count = lst->_count;
+	return (new_lst);
+}
+
+/// @brief data should be 3 time of the ecpected actual size
+/// @brief data_elem_count should be 3 time the actual elem count expected
+/// @param lst
+/// @param data
+/// @return
+t_lst	*lst_copy_static(t_lst *lst, void *data, int32_t max_capacity)
+{
+	t_lst	*new_lst;
+
+	if (!lst)
+		return (NULL);
+	new_lst = lst_new_static(data, max_capacity, lst->_size);
+	if (!new_lst)
+		return (NULL);
+	ft_memcpy(&new_lst->data[new_lst->_offset * new_lst->_size],
+				&lst->data[lst->_offset * lst->_size],
+				lst->_count * lst->_size);
+	new_lst->_count = lst->_count;
+	return (new_lst);
+}
+
+/596            0           0     0     644     1338      `
+!<arch>
+//                                              22        `
+_lst_group_by_new.c/
+
+/0              0           0     0     644     1188      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+t_group_by	*_lst_group_by_new_temp(int32_t group_count)
+{
+	t_group_by	*group;
+
+	group = (t_group_by *)group_by_clause_pool();
+	group_count *= 2;
+	group->_array_length = group_count;
+	group->data = group_by_data_pool(group_count);
+	group->_group_count = 0;
+	return (group);
+}
+/617            0           0     0     644     1480      `
+!<arch>
+//                                              22        `
+lst_filter_include.c/
+/0              0           0     0     644     1329      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+
+        +:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+
+        +#+        */
+/*                                                +#+#+#+#+#+
+        +#+           */
+/*   Created: 2022/11/14 20:38:39 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/14 20:38:39 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lst.h"
+
+/// @brief
+/// @param lst
+/// @param exclude_indices
+/// @return
+t_lst	*lst_filter_include(t_lst *lst, t_lst *include_indices)
+{
+	t_lst	*new_lst;
+	int32_t	i;
+
+	new_lst = lst_new_temp(include_indices->_count, include_indices->_size);
+	if (!new_lst)
+		return (NULL);
+	i = 0;
+	while (i < include_indices->_count)
+	{
+		lst_add(new_lst, lst_get(lst, lst_get_int(include_indices, i)));
+		i++;
+	}
+	return (new_lst);
+}
+
+ft_lstnew.o/    0           0     0     644     1192      `
+!<arch>
+ft_lstnew.c/    0           0     0     644     1124      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/02 07:29:17 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*ret;
+
+	ret = (t_list *)malloc(sizeof(t_list));
+	if (ret == NULL)
+		return (NULL);
+	ret->content = content;
+	ret->next = NULL;
+	return (ret);
+}
+/639            0           0     0     644     1164      `
+!<arch>
+//                                              20        `
+ft_lstadd_front.c/
+
+/0              0           0     0     644     1015      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/26 09:43:08 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
+}
+
+ft_lstsize.o/   0           0     0     644     1130      `
+!<arch>
+ft_lstsize.c/   0           0     0     644     1061      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/25 13:54:54 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_lstsize(t_list *lst)
+{
+	int	len;
+
+	len = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		len++;
+	}
+	return (len);
+}
+
+ft_lstlast.o/   0           0     0     644     1204      `
+!<arch>
+ft_lstlast.c/   0           0     0     644     1136      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/28 12:15:44 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	t_list	*current;
+
+	current = lst;
+	if (!current)
+		return (NULL);
+	while (current && current->next != NULL)
+	{
+		current = current->next;
+	}
+	return (current);
+}
+/658            0           0     0     644     1278      `
+!<arch>
+//                                              18        `
+ft_lstadd_back.c/
+/0              0           0     0     644     1132      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/28 15:30:32 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
+
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	last = ft_lstlast(*lst);
+	last->next = new;
+}
+ft_lstdelone.o/ 0           0     0     644     1120      `
+!<arch>
+ft_lstdelone.c/ 0           0     0     644     1051      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/31 16:58:37 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
+}
+
+ft_lstclear.o/  0           0     0     644     1210      `
+!<arch>
+ft_lstclear.c/  0           0     0     644     1142      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/28 15:26:31 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*tmp;
+	int		i;
+
+	i = 0;
+	while (lst && *lst)
+	{
+		i++;
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		(*lst) = tmp;
+	}
+	*lst = NULL;
+}
+ft_lstiter.o/   0           0     0     644     1176      `
+!<arch>
+ft_lstiter.c/   0           0     0     644     1108      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/10/28 15:27:07 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	t_list	*current;
+
+	current = lst;
+	while (current != NULL)
+	{
+		(*f)(current->content);
+		current = current->next;
+	}
+}
+ft_lstmap.o/    0           0     0     644     1466      `
+!<arch>
+ft_lstmap.c/    0           0     0     644     1398      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 12:57:53 by mroy              #+#    #+#             */
+/*   Updated: 2022/11/09 14:37:32 by mroy             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*new_lst;
+	t_list	*new_item;
+	void	*content;
+
+	if (!f || !del || !lst)
+		return (NULL);
+	new_lst = NULL;
+	while (lst)
+	{
+		content = (*f)(lst->content);
+		new_item = ft_lstnew(content);
+		if (new_item == NULL)
+		{
+			ft_lstclear(&new_lst, del);
+			free(content);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_lst, new_item);
+		lst = lst->next;
+	}
+	return (new_lst);
+}
