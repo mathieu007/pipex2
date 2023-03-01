@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/02/28 22:13:32 by math             ###   ########.fr       */
+/*   Updated: 2023/03/01 14:12:22 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
 	}
 	return (cmds);
 }
-
+/// @brief
+/// @param envp
+/// @return
 char	**parse_paths(char **envp)
 {
 	char	**paths;
@@ -83,8 +85,6 @@ void	execute(t_proc *proc, int32_t i)
 	fp_cmd = get_full_path_cmd(proc, proc->cmds[i]->cmd);
 	if (!fp_cmd)
 		error_exit();
-	
-	ret = execve(fp_cmd, proc->cmds[i]->args, proc->envp);
-	if (ret == -1)
+	if (execve(fp_cmd, proc->cmds[i]->args, proc->envp) == -1)
 		error_exit();
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:57:14 by mroy              #+#    #+#             */
-/*   Updated: 2023/02/28 22:23:33 by math             ###   ########.fr       */
+/*   Updated: 2023/03/01 14:11:26 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child_process(t_proc *proc, int32_t i)
+void	child_process(t_proc *proc, int32_t cmd_i)
 {
 	int32_t	f_in;
 
@@ -22,11 +22,11 @@ void	child_process(t_proc *proc, int32_t i)
 	dup2(f_in, STDIN_FILENO);
 	dup2(proc->file_out->fd, STDOUT_FILENO);
 	close(proc->file_in->fd);
-	execute(proc, i);
+	execute(proc, cmd_i);
 	unlink_fifo(proc->file_in->f_name);
 }
 
-void	parent_process(t_proc *proc, int32_t i)
+void	parent_process(t_proc *proc, int32_t cmd_i)
 {
 	int32_t	f_out;
 
@@ -38,6 +38,6 @@ void	parent_process(t_proc *proc, int32_t i)
 	dup2(f_out, STDOUT_FILENO);
 	dup2(proc->file_in->fd, STDIN_FILENO);
 	close(proc->file_out->fd);
-	execute(proc, i);
+	execute(proc, cmd_i);
 	unlink_fifo(proc->file_out->f_name);
 }
