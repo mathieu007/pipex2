@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/02/28 22:20:32 by math             ###   ########.fr       */
+/*   Updated: 2023/03/01 15:49:54 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,26 @@ t_proc	*get_proc(void)
 	return (&proc[0]);
 }
 
-t_proc	*init_data(int32_t argc, char **argv, char **envp, int *fds)
+t_proc	*init_fds(int *fds)
 {
 	t_proc	*proc;
 
 	proc = get_proc();
 	proc->file_in->fd = fds[0];
-	proc->file_in->f_name = ft_strjoin("./", argv[1]);
 	proc->file_out->fd = fds[1];
+	return (&proc[0]);
+}
+
+t_proc	*init_data(int32_t argc, char **argv, char **envp)
+{
+	t_proc	*proc;
+
+	proc = get_proc();
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+		proc->here_doc = true;
+	else
+		proc->here_doc = false;
+	proc->file_in->f_name = ft_strjoin("./", argv[1]);
 	proc->file_out->f_name = ft_strjoin("./", argv[argc - 1]);
 	proc->paths = parse_paths(envp);
 	proc->cmds = parse_cmds(proc, &argv[2], 2);
@@ -48,7 +60,8 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 		usage();
 	if (pipe(fds) == -1)
 		error_exit();
-	proc = init_data(argc, argv, envp, &fds[0]);
+	proc = init_data(argc, argv, envp);
+	proc = init_fds(fds);
 	pid1 = fork();
 	if (pid1 == -1)
 		error_exit();

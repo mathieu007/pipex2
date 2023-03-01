@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:57:14 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/01 14:11:26 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/01 15:29:13 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	child_process(t_proc *proc, int32_t cmd_i)
 	dup2(proc->file_out->fd, STDOUT_FILENO);
 	close(proc->file_in->fd);
 	execute(proc, cmd_i);
-	unlink_fifo(proc->file_in->f_name);
+	//unlink_fifo(proc->file_in->f_name);
 }
 
 void	parent_process(t_proc *proc, int32_t cmd_i)
@@ -39,5 +39,5 @@ void	parent_process(t_proc *proc, int32_t cmd_i)
 	dup2(proc->file_in->fd, STDIN_FILENO);
 	close(proc->file_out->fd);
 	execute(proc, cmd_i);
-	unlink_fifo(proc->file_out->f_name);
+	//unlink_fifo(proc->file_out->f_name);
 }

@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/03/01 14:18:52 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/01 15:33:09 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
 	}
 	return (cmds);
 }
+
 /// @brief
 /// @param envp
 /// @return
@@ -52,6 +53,8 @@ char	**parse_paths(char **envp)
 	int32_t	i;
 	char	*seps;
 
+	if (!envp)
+		return (NULL);
 	seps = ":=";
 	i = 0;
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
