@@ -3,13 +3,10 @@
         {
             "type": "cppbuild",
             "label": "pipex",
-            "command": "/usr/bin/gcc",
+            "command": "/usr/bin/gcc-11",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-				"-Wall",
-				"-Wextra",
-				"-Werror",
                 "-I${workspaceFolder}/include/",
                 "${workspaceFolder}/src/pipex/*.c",
 				"${workspaceFolder}/libft/**/*.c",
@@ -24,22 +21,16 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "detail": "Tâche générée par le débogueur."
         },
 		{
             "type": "cppbuild",
             "label": "pipex_bonus",
-            "command": "/usr/bin/gcc",
+            "command": "/usr/bin/gcc-11",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-				"-Wall",
-				"-Wextra",
-				"-Werror",
                 "-I${workspaceFolder}/include/",
                 "${workspaceFolder}/src/bonus/*.c",
 				"${workspaceFolder}/libft/**/*.c",

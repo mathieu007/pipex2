@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2023/02/28 07:52:12 by mroy              #+#    #+#             */
 /*   Updated: 2023/02/28 07:52:12 by mroy             ###   ########.fr       */
 /*                                                                            */
@@ -129,5 +132,6 @@ void	*resize_pool(t_pool_info *pool);
 t_pool_info	**get_pools(void);
 char	*ft_strjoin_temp(char const *s1, char const *s2);
 void	free_p_all(void);
+char	**ft_split_many(char *s, char *separators);
 
 #endif

@@ -1,0 +1,7 @@
+total 140
+-rwxr-xr-x 1 math math 63720 Feb 28 21:50 a.out
+drwxr-xr-x 2 math math  4096 Feb 28 19:26 include
+drwxr-xr-x 8 math math  4096 Feb 28 19:50 libft
+-rw-r--r-- 1 math math     0 Feb 28 22:16 outfile
+-rwxr-xr-x 1 math math 63720 Feb 28 22:14 pipex
+drwxr-xr-x 4 math math  4096 Feb 27 20:02 src

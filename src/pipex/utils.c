@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/02/28 16:50:24 by mroy             ###   ########.fr       */
+/*   Updated: 2023/02/28 22:13:32 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-char	*find_path(char *cmd, char **envp)
-{
-	char	**paths;
-	char	*path;
-	int32_t	i;
-	char	*first;
-
-	i = 0;
-	while (ft_strnstr(envp[i], "PATH", 4) == 0)
-		i++;
-	paths = ft_split_temp(envp[i] + 5, ':');
-	i = 0;
-	while (paths[i])
-	{
-		first = ft_strjoin_temp(paths[i], "/");
-		path = ft_strjoin_temp(first, cmd);
-		if (access(path, F_OK) == 0)
-			return (path);
-		i++;
-	}
-	return (0);
-}
 
 void	unlink_fifo(char *f_name)
 {
@@ -71,11 +48,13 @@ char	**parse_paths(char **envp)
 {
 	char	**paths;
 	int32_t	i;
+	char	*seps;
 
+	seps = ":=";
 	i = 0;
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
-	paths = ft_split(envp[i], ':');
+	paths = ft_split_many(envp[i], seps);
 	return (paths);
 }
 
@@ -88,7 +67,7 @@ char	*get_full_path_cmd(t_proc *proc, char *cmd)
 	while (proc->paths[i])
 	{
 		path = ft_strjoin_temp(proc->paths[i], "/");
-		path = ft_strjoin_temp(path, cmd);
+		path = ft_strjoin(path, cmd);
 		if (access(path, F_OK) == 0)
 			return (path);
 		i++;
