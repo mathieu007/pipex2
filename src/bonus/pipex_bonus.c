@@ -5,37 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 14:47:58 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/01 16:12:51 by mroy             ###   ########.fr       */
+/*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
+/*   Updated: 2023/03/02 16:41:14 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	child_process(char *argv, char **envp)
+void	usage_bonus(void)
 {
-	pid_t	pid;
-	int32_t	fds[2];
-	t_proc	*proc;
-
-	if (pipe(fds) == -1)
-		error_exit();
-	pid = fork();
-	proc = init_fds(fds);
-	if (pid == -1)
-		error_exit();
-	if (pid == 0)
-	{
-		close(proc->file_in);
-		dup2(proc->file_out, STDOUT_FILENO);
-		execute(argv, envp);
-	}
-	else
-	{
-		close(proc->file_out);
-		dup2(proc->file_in, STDIN_FILENO);
-		waitpid(pid, NULL, 0);
-	}
+	printf("Error: Invalid arguments count.");
+	printf("Example: ./pipex <file_in> <cmd1> <cmd2> <...> <file_out>\n");
+	printf("Example: ./pipex \"here_doc\" <LIMITER> <cmd>"
+			"<cmd1> <...> <file_out>\n");
+	exit(EXIT_FAILURE);
 }
 
 void	here_doc(char *sep, int argc)
@@ -46,7 +29,7 @@ void	here_doc(char *sep, int argc)
 	int32_t	sep_len;
 
 	if (argc < 6)
-		usage();
+		usage_bonus();
 	if (pipe(fds) == -1)
 		error_exit();
 	pid = fork();
@@ -71,24 +54,18 @@ void	here_doc(char *sep, int argc)
 	}
 }
 
-int32_t	open_files(t_proc *proc, int32_t argc, char **argv)
+int32_t	open_files_bonus(t_proc *proc, int32_t argc, char **argv)
 {
-	int32_t	f_in;
 	int32_t	f_out;
 
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	if (proc->here_doc)
 	{
 		proc->here_doc = true;
-		f_out = open(argv, O_WRONLY | O_CREAT | O_APPEND, 0777);
-		here_doc(argv[2], argc);
+		f_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
+		//here_doc(argv[2], argc);
 	}
 	else
-	{
-		proc->here_doc = false;
-		f_out = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-		f_in = open(argv, O_RDONLY, 0777);
-		dup2(f_in, STDIN_FILENO);
-	}
+		f_out = open_files(proc, argc, argv);
 	return (f_out);
 }
 
@@ -97,12 +74,13 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 	t_proc	*proc;
 	int32_t	f_out;
 
-	if (argc < 5)
+	if (argc < 6)
 		usage_bonus();
 	proc = init_data(argc, argv, envp);
-    f_out = open_files(proc, argc, argv);
-	while (i < argc - 2)
-		child_process(argv[i++], envp);
+	f_out = open_files_bonus(proc, argc, argv);
+	pipe_childs(proc);
+	exec_childs(proc);
 	dup2(f_out, STDOUT_FILENO);
-	execute(argv[argc - 2], envp);
+	execute(proc, proc->cmds_count - 1);
+	return (0);
 }

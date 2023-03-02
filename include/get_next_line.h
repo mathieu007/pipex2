@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:52:27 by mroy              #+#    #+#             */
-/*   Updated: 2023/02/28 08:15:04 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/02 13:57:19 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 # include <unistd.h>
 
 char	*get_next_line_temp(int fd);
+char	*read_buff(int32_t fd, char **cur_buff, char *save);
+char	*ret_buff(int32_t fd, char **cur_buff, char *save);
 
 #endif

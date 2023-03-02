@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/03/01 15:33:09 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/02 13:47:12 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
 	int32_t	i;
 
 	i = 0;
-	cmds = malloc(sizeof(t_cmd *) * count);
+	cmds = malloc(sizeof(t_cmd *) * (count + 1));
 	if (cmds == NULL)
 		return (free_all(), NULL);
 	proc->cmds = cmds;
@@ -41,6 +41,7 @@ t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
 		cmds[i]->cmd = s_cmds[0];
 		i++;
 	}
+	cmds[i] = NULL;
 	return (cmds);
 }
 
@@ -80,13 +81,14 @@ char	*get_full_path_cmd(t_proc *proc, char *cmd)
 	return (NULL);
 }
 
-void	execute(t_proc *proc, int32_t i)
+int32_t	open_files(t_proc *proc, int32_t argc, char **argv)
 {
-	char	*fp_cmd;
+	int32_t	f_in;
+	int32_t	f_out;
 
-	fp_cmd = get_full_path_cmd(proc, proc->cmds[i]->cmd);
-	if (!fp_cmd)
-		error_exit();
-	if (execve(fp_cmd, proc->cmds[i]->args, proc->envp) == -1)
-		error_exit();
+	proc->here_doc = false;
+	f_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	f_in = open(argv[2], O_RDONLY, 0777);
+	dup2(f_in, STDIN_FILENO);
+	return (f_out);
 }
