@@ -2,8 +2,8 @@
 CC          	:= gcc
 
 #The Target Binary Program
-NAME			:= push_swap
-BONUS_NAME		:= checker
+NAME			:= pipex
+BONUS_NAME		:= pipex_bonus
 COMMONS_NAME	:= commons
 
 #The Directories, Source, Includes, Objects, Binary and Resources
@@ -15,7 +15,7 @@ INCDIR			:= include
 BUILDDIR		:= obj
 BUILDDIR_BONUS	:= obj_bonus
 BUILDDIR_COMMONS:= obj_common
-TARGETDIR		:= bin
+TARGETDIR		:= 
 SRCEXT			:= c
 OBJEXT			:= o
 LIBFT_DIR		:= libft
@@ -44,13 +44,13 @@ BONUS_SRC   :=	src/bonus/get_next_line_temp.c	\
 OBJECTS			:= $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT))) $(patsubst $(COMMONSDIR)/%,$(BUILDDIR_COMMONS)/%,$(SRC_COMMONS:.$(SRCEXT)=.$(OBJEXT)))
 OBJECTS_BONUS	:= $(patsubst $(BONUSDIR)/%,$(BUILDDIR_BONUS)/%,$(BONUS_SRC:.$(SRCEXT)=.$(OBJEXT))) $(patsubst $(COMMONSDIR)/%,$(BUILDDIR_COMMONS)/%,$(SRC_COMMONS:.$(SRCEXT)=.$(OBJEXT)))
 
-all: directories $(NAME) $(BONUS_NAME)
+all: directories bonus $(NAME) $(BONUS_NAME)
 
 #Remake
 remake: cleaner all
 	
 directories:
-	mkdir -p $(TARGETDIR)
+	# mkdir -p $(TARGETDIR)
 	mkdir -p $(BUILDDIR)
 	mkdir -p $(BUILDDIR_BONUS)
 	mkdir -p $(BUILDDIR_COMMONS)
@@ -72,18 +72,17 @@ cleaner: clean
 fclean: clean
 	$(MAKE) fclean -C $(LIBFT_DIR)
 	$(RM) $(LIBFT)
-	$(RM) -rf $(TARGETDIR)
 	
-bonus: $(OBJECTS_BONUS) $(BONUS_NAME) 
+bonus: $(OBJECTS) $(OBJECTS_BONUS)
 
 #Link
 $(NAME): $(OBJECTS) 
 	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE) -o $(TARGETDIR)/$(NAME) $^ $(LIBFT)
+	$(CC) $(CFLAGS) $(INCLUDE) -o $(NAME) $^ $(LIBFT)
 
 $(BONUS_NAME): $(OBJECTS_BONUS)
 	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE) -o $(TARGETDIR)/$(BONUS_NAME) $^ $(LIBFT)	
+	$(CC) $(CFLAGS) $(INCLUDE) -o $(BONUS_NAME) $^ $(LIBFT)
 
 $(BUILDDIR_COMMONS)/%.$(OBJEXT): $(COMMONSDIR)/%.$(SRCEXT)
 	mkdir -p $(dir $@)

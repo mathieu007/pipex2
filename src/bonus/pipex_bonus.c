@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 14:27:23 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/03 16:40:37 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,41 @@ void	usage_bonus(void)
 	printf("Example: ./pipex <file_in> <cmd1> <cmd2> <...> <file_out>\n");
 	printf("Example: ./pipex \"here_doc\" <LIMITER> <cmd>"
 			"<cmd1> <...> <file_out>\n");
-	exit(EXIT_FAILURE);
+	error_exit(NULL);
+}
+
+void	write_line(char *sep, int32_t fd_in, int32_t fd_out)
+{
+	char	*line;
+	int32_t	sep_len;
+
+	close(fd_in);
+	sep_len = ft_strlen(sep);
+	line = get_next_line_temp(STDIN_FILENO);
+	while (line)
+	{
+		if (ft_strncmp(line, sep, sep_len) == 0)
+			exit(EXIT_SUCCESS);
+		write(fd_out, line, ft_strlen(line));
+		line = get_next_line_temp(STDIN_FILENO);
+	}
 }
 
 void	here_doc(char *sep, int argc)
 {
 	pid_t	pid;
 	int32_t	fds[2];
-	char	*line;
-	int32_t	sep_len;
 
 	if (argc < 6)
 		usage_bonus();
 	if (pipe(fds) == -1)
 		error_exit(NULL);
+	init_fds(fds, 0);
 	pid = fork();
+	if (pid == -1)
+		error_exit(NULL);
 	if (pid == 0)
-	{
-		close(fds[0]);
-		sep_len = ft_strlen(sep);
-		line = get_next_line_temp(0);
-		while (line)
-		{
-			if (ft_strncmp(line, sep, sep_len) == 0)
-				exit(EXIT_SUCCESS);
-			write(fds[1], line, ft_strlen(line));
-			line = get_next_line_temp(0);
-		}
-	}
+		write_line(sep, fds[0], fds[1]);
 	else
 	{
 		close(fds[1]);

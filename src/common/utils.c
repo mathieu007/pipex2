@@ -6,10 +6,11 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 11:18:02 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/03 18:17:09 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "errno.h"
 #include "pipex.h"
 
 void	unlink_fifo(char *f_name)
@@ -18,6 +19,47 @@ void	unlink_fifo(char *f_name)
 	{
 		free_all();
 		perror("unlink() error");
+	}
+}
+
+void	escape_single_quotes(char **cmds_split)
+{
+	int32_t	i;
+	int32_t	c_i;
+	char	**new_cmds;
+	int32_t	count;
+	int32_t	count_sep;
+
+	i = 0;
+	count = 0;
+	while (cmds_split[i])
+		count++;
+	new_cmds = malloc(count + 1);
+	new_cmds[count] = NULL;
+	while (cmds_split[i])
+	{
+		c_i = 0;
+		count = 0;
+		count_sep = 0;
+		while (cmds_split[i][c_i])
+		{
+			if (cmds_split[i][c_i] == '\'')
+				count_sep++;
+			c_i++;
+			count++;
+		}
+		c_i = 0;
+		new_cmds[i] = malloc(count + count_sep + 1);
+		new_cmds[i][count + count_sep] = '\0';
+		while (cmds_split[i][c_i])
+		{
+			if (cmds_split[i][c_i] == '\'')
+			{
+				new_cmds[i][c_i++] = '\'';
+				new_cmds[i][c_i] = '\'';
+			}
+		}
+		i++;
 	}
 }
 
@@ -60,7 +102,7 @@ char	**parse_paths(char **envp)
 
 	if (!envp)
 		return (NULL);
-	seps = "=:";
+	seps = ":";
 	i = 0;
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
@@ -92,12 +134,18 @@ int32_t	open_files(t_proc *proc)
 	int32_t	f_out;
 
 	proc->here_doc = false;
-	f_out = open(proc->fds->f_out_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	f_out = open(proc->fds->f_out_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (f_out == -1)
-		error_exit(proc->fds->f_out_name);
+	{
+		f_out = 0;
+		printf("%s: %s\n", sys_errlist[errno], proc->fds->f_out_name);
+	}
 	f_in = open(proc->fds->f_in_name, O_RDONLY, 0777);
 	if (f_in == -1)
-		error_exit(proc->fds->f_in_name);
+	{
+		f_in = 0;
+		printf("%s: %s\n", sys_errlist[errno], proc->fds->f_in_name);
+	}
 	dup2(f_in, STDIN_FILENO);
 	return (f_out);
 }
