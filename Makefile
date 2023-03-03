@@ -1,9 +1,9 @@
 #Compiler and Linker
-CC          := gcc
+CC          	:= gcc
 
 #The Target Binary Program
-NAME		:= push_swap
-BONUS_NAME	:= checker
+NAME			:= push_swap
+BONUS_NAME		:= checker
 COMMONS_NAME	:= commons
 
 #The Directories, Source, Includes, Objects, Binary and Resources
@@ -30,13 +30,19 @@ LIB         := -L./$(LIBFT_DIR) -lm
 INCDEP      := -I$(INCDIR)
 
 
-SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT)")
-# SOURCES     :=  src/push_swap/push_swap.c
-SRC_COMMONS := $(shell find $(COMMONSDIR) -type f -name *.$(SRCEXT)")
-BONUS_SRC   :=	$(shell find $(BONUSDIR) -type f -name *.$(SRCEXT)")
+SOURCES     :=  src/pipex/pipex.c	\
 
-OBJECTS				:= $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT))) $(patsubst $(COMMONSDIR)/%,$(BUILDDIR_COMMONS)/%,$(SRC_COMMONS:.$(SRCEXT)=.$(OBJEXT)))
-OBJECTS_BONUS		:= $(patsubst $(BONUSDIR)/%,$(BUILDDIR_BONUS)/%,$(BONUS_SRC:.$(SRCEXT)=.$(OBJEXT))) $(patsubst $(COMMONSDIR)/%,$(BUILDDIR_COMMONS)/%,$(SRC_COMMONS:.$(SRCEXT)=.$(OBJEXT)))
+SRC_COMMONS :=	src/common/data.c	\
+				src/common/error.c	\
+				src/common/free.c	\
+				src/common/process.c	\
+				src/common/utils.c	\
+
+BONUS_SRC   :=	src/bonus/get_next_line_temp.c	\
+				src/bonus/pipex_bonus.c	\
+
+OBJECTS			:= $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT))) $(patsubst $(COMMONSDIR)/%,$(BUILDDIR_COMMONS)/%,$(SRC_COMMONS:.$(SRCEXT)=.$(OBJEXT)))
+OBJECTS_BONUS	:= $(patsubst $(BONUSDIR)/%,$(BUILDDIR_BONUS)/%,$(BONUS_SRC:.$(SRCEXT)=.$(OBJEXT))) $(patsubst $(COMMONSDIR)/%,$(BUILDDIR_COMMONS)/%,$(SRC_COMMONS:.$(SRCEXT)=.$(OBJEXT)))
 
 all: directories $(NAME) $(BONUS_NAME)
 
@@ -57,8 +63,7 @@ clean:
 	$(MAKE) clean -C $(LIBFT_DIR)
 	$(RM) $(LIBFT_DIR)/$(LIBFT_FILE)
 	$(RM) $(NAME)
-	$(RM) $(BONUS_NAME)
-	
+	$(RM) $(BONUS_NAME)	
 
 #Full Clean, Objects and Binaries
 cleaner: clean
