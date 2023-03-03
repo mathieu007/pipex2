@@ -97,5 +97,4 @@ $(BUILDDIR_BONUS)/%.$(OBJEXT): $(BONUSDIR)/%.$(SRCEXT)
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDE) $(INCDEP) -c -o $@ $<
 
-
 .PHONY: bonus all remake clean cleaner resources
