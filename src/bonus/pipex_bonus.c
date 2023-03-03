@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/02 16:41:14 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/03 11:14:01 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	usage_bonus(void)
 {
-	printf("Error: Invalid arguments count.");
+	perror("Error: ");
+	printf("Invalid arguments count.");
 	printf("Example: ./pipex <file_in> <cmd1> <cmd2> <...> <file_out>\n");
 	printf("Example: ./pipex \"here_doc\" <LIMITER> <cmd>"
-			"<cmd1> <...> <file_out>\n");
+		"<cmd1> <...> <file_out>\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -31,7 +32,7 @@ void	here_doc(char *sep, int argc)
 	if (argc < 6)
 		usage_bonus();
 	if (pipe(fds) == -1)
-		error_exit();
+		error_exit(NULL);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -62,10 +63,10 @@ int32_t	open_files_bonus(t_proc *proc, int32_t argc, char **argv)
 	{
 		proc->here_doc = true;
 		f_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
-		//here_doc(argv[2], argc);
+		here_doc(argv[2], argc);
 	}
 	else
-		f_out = open_files(proc, argc, argv);
+		f_out = open_files(proc);
 	return (f_out);
 }
 

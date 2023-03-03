@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/02/28 14:52:38 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/03 09:57:19 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,23 @@ void	free_cmds(t_proc *proc)
 	while (i < proc->cmds_count)
 	{
 		i2 = 0;
-		while (proc->cmds[i]->args)
+		if (proc->cmds[i] && proc->cmds[i]->args)
 		{
-			free(proc->cmds[i]->args[i2]);
-			i2++;
-		}
-		if (proc->cmds[i]->args)
+			while (proc->cmds[i]->args[i2])
+			{
+				free(proc->cmds[i]->args[i2]);
+				proc->cmds[i]->args[i2] = NULL;
+				i2++;
+			}
 			free(proc->cmds[i]->args);
+			proc->cmds[i]->args = NULL;
+		}
 		free(proc->cmds[i]);
+		proc->cmds[i] = NULL;
 		i++;
 	}
 	free(proc->cmds);
+	proc->cmds = NULL;
 }
 
 void	free_all(void)
@@ -43,14 +49,16 @@ void	free_all(void)
 	proc = get_proc();
 	if (proc == NULL)
 		return ;
-	if (proc->paths != NULL)
+	if (proc->paths)
 	{
 		while (proc->paths[i])
 		{
-			free(proc->paths);
+			free(proc->paths[i]);
+			proc->paths[i] = NULL;
 			i++;
 		}
 		free(proc->paths);
+		proc->paths = NULL;
 	}
 	if (proc->cmds != NULL)
 		free_cmds(proc);
