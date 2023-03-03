@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/02 16:41:14 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/03 07:16:56 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	usage(void)
 	printf("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n");
 }
 
+/// @brief https://opensource.com/article/19/4/interprocess-communication-linux-channels
+/// @param argc
+/// @param argv
+/// @param envp
+/// @return
 int32_t	main(int32_t argc, char **argv, char **envp)
 {
 	t_proc	*proc;
