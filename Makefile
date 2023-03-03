@@ -31,10 +31,8 @@ INCDEP      := -I$(INCDIR)
 
 
 SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT)")
-# SOURCES     :=  src/push_swap/push_swap.c	\
-
+# SOURCES     :=  src/push_swap/push_swap.c
 SRC_COMMONS := $(shell find $(COMMONSDIR) -type f -name *.$(SRCEXT)")
-
 BONUS_SRC   :=	$(shell find $(BONUSDIR) -type f -name *.$(SRCEXT)")
 
 OBJECTS				:= $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT))) $(patsubst $(COMMONSDIR)/%,$(BUILDDIR_COMMONS)/%,$(SRC_COMMONS:.$(SRCEXT)=.$(OBJEXT)))

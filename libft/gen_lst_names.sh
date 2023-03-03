@@ -1,4 +1,4 @@
 #!/bin/bash
 #the first arg
 find lst -type f -name "*.c" > gen_lst_names.txt
-sed -i.bak "s/$(printf '\.c')/$(printf '\.c\t\n')\\\/g" filenames.txt
+sed -i.bak "s/$(printf '\.c')/$(printf '\.c\t\n')\\\/g" gen_lst_names.txt
