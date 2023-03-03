@@ -109,7 +109,6 @@ char	*ft_itoa_temp(int n);
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-void	ft_print_bits(size_t const size, void const *const ptr);
 void	ft_putstr(char *c);
 t_file	*ft_fopen(const char *path);
 int	ft_fgetc(t_file *stream);

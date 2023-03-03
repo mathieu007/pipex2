@@ -163,6 +163,7 @@ clean:
 	$(RM) -rf $(BUILDDIR)
 	$(RM) -rf $(BUILDDIR_LST)
 	$(RM) -rf $(BUILDDIR_BONUS)
+	$(RM) -rf $(NAME)
 
 fclean:	clean
 	$(RM) $(NAME)
