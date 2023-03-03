@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 10:58:17 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/03 14:56:14 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	error_exit(const char *msg)
 {
 	t_proc	*proc;
+	char	*join_str;
 
 	proc = get_proc();
 	free_all();
@@ -29,8 +30,9 @@ void	error_exit(const char *msg)
 		close(proc->fds->f_out);
 		unlink_fifo(get_proc()->fds->f_out_name);
 	}
-	perror("Error: ");
+	join_str = "Error";
 	if (msg != NULL)
-		printf(": %s\n", msg);
+		join_str = ft_strjoin("Error: ", msg);
+	perror(join_str);
 	exit(EXIT_FAILURE);
 }
