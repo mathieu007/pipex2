@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 11:14:01 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/03 14:27:23 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	usage_bonus(void)
 	printf("Invalid arguments count.");
 	printf("Example: ./pipex <file_in> <cmd1> <cmd2> <...> <file_out>\n");
 	printf("Example: ./pipex \"here_doc\" <LIMITER> <cmd>"
-		"<cmd1> <...> <file_out>\n");
+			"<cmd1> <...> <file_out>\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -62,7 +62,8 @@ int32_t	open_files_bonus(t_proc *proc, int32_t argc, char **argv)
 	if (proc->here_doc)
 	{
 		proc->here_doc = true;
-		f_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
+		f_out = open(proc->fds->f_out_name, O_WRONLY | O_CREAT | O_APPEND,
+				0777);
 		here_doc(argv[2], argc);
 	}
 	else

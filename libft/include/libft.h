@@ -16,7 +16,6 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define AUTO_MALLOC_SLOTS 1000
 # define MAX_POOLS 60
 # define SMALL_POOL_SIZE 8388480
 # define MED_POOL_SIZE 33553920

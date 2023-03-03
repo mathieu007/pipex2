@@ -49,6 +49,7 @@ SRC	=	src/alloc_pool/data_pool.c	\
 		src/ft_substr.c	\
 		src/ft_tolower.c	\
 		src/ft_toupper.c	\
+		src/ft_substr_temp.c	\
 		src/memory/memory_pool.c	\
 		src/memory/memory_pool_free.c	\
 		src/memory/memory_pool_resize.c	\
@@ -67,7 +68,6 @@ SRC_BONUS =	src/bonus/ft_lstadd_back.c	\
 SRC_LST =	src/lst/_lst_group_by_add.c	\
 			src/lst/_lst_group_by_internal.c	\
 			src/lst/_lst_group_by_new.c	\
-			src/lst/ft_substr_temp.c	\
 			src/lst/func/inc_ptr.c	\
 			src/lst/func/params1.c	\
 			src/lst/func/params2.c	\
