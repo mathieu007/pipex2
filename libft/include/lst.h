@@ -6,7 +6,7 @@
 /*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:03:23 by math              #+#    #+#             */
-/*   Updated: 2023/03/05 15:49:21 by math             ###   ########.fr       */
+/*   Updated: 2023/03/05 16:07:35 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,5 +281,7 @@ t_lst			*lst_filter_indices(t_lst *lst,
 					bool (*match_item)(void *item, void *values),
 					void *values);
 t_lst			*lst_remove_at_end(t_lst *lst, int32_t count);
+char			*ft_replace_char_temp(char *str, char to_replace,
+					char *replace_by);
 
 #endif

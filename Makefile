@@ -21,7 +21,6 @@ OBJEXT			:= o
 LIBFT_DIR		:= libft
 LIBFT_FILE		:= libft.a
 LIBFT			:= $(LIBFT_DIR)/$(LIBFT_FILE)
-INCLUDE			:= -I$(LIBFT_DIR)
 INCLIBFTDEP 	:= -I$(LIBFT_DIR)/$(INCDIR)
 
 #Flags, Libraries and Includes
@@ -79,22 +78,22 @@ bonus: $(OBJECTS) $(OBJECTS_BONUS)
 #Link
 $(NAME): $(OBJECTS) 
 	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE) -o $(NAME) $^ $(LIBFT)
+	$(CC) $(CFLAGS) $(INCLIBFTDEP) $(INCDEP) -o $(NAME) $^ $(LIBFT)
 
 $(BONUS_NAME): $(OBJECTS_BONUS)
 	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE) -o $(BONUS_NAME) $^ $(LIBFT)
+	$(CC) $(CFLAGS) $(INCLIBFTDEP) $(INCDEP) -o $(BONUS_NAME) $^ $(LIBFT)
 
 $(BUILDDIR_COMMONS)/%.$(OBJEXT): $(COMMONSDIR)/%.$(SRCEXT)
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDE) $(INCDEP) -c -o $@ $<
+	$(CC) $(CFLAGS) $(INCLIBFTDEP) $(INCDEP) -c -o $@ $<
 
 $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDE) $(INCDEP) -c -o $@ $<
+	$(CC) $(CFLAGS) $(INCLIBFTDEP) $(INCDEP) -c -o $@ $<
 
 $(BUILDDIR_BONUS)/%.$(OBJEXT): $(BONUSDIR)/%.$(SRCEXT)
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDE) $(INCDEP) -c -o $@ $<
+	$(CC) $(CFLAGS) $(INCLIBFTDEP) $(INCDEP) -c -o $@ $<
 
 .PHONY: bonus all remake clean cleaner resources
