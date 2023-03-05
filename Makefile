@@ -22,6 +22,7 @@ LIBFT_DIR		:= libft
 LIBFT_FILE		:= libft.a
 LIBFT			:= $(LIBFT_DIR)/$(LIBFT_FILE)
 INCLUDE			:= -I$(LIBFT_DIR)
+INCLIBFTDEP 	:= -I$(LIBFT_DIR)/$(INCDIR)
 
 #Flags, Libraries and Includes
 CFLAGS      := -Wall -Wextra -Werror -g
