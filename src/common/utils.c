@@ -6,7 +6,7 @@
 /*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/03/05 16:30:19 by math             ###   ########.fr       */
+/*   Updated: 2023/03/05 16:33:15 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
 		cmds[i] = malloc(sizeof(t_cmd));
 		if (cmds[i] == NULL)
 			return (free_all(), NULL);
-		s_cmds = ft_split(argv[i], ' ');
+		s_cmds = ft_split(ft_replace_char_temp(argv[i], '\'', "\\'"), ' ');
 		if (s_cmds == NULL)
 			return (free_all(), NULL);
 		cmds[i]->args = s_cmds;

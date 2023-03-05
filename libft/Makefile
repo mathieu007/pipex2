@@ -51,6 +51,7 @@ SRC	=	src/alloc_pool/data_pool.c	\
 		src/ft_toupper.c	\
 		src/ft_replace_temp.c	\
 		src/ft_substr_temp.c	\
+		src/ft_count_char.c	\
 		src/memory/memory_pool.c	\
 		src/memory/memory_pool_free.c	\
 		src/memory/memory_pool_resize.c	\
