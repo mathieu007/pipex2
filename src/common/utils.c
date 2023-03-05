@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 18:17:09 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/05 08:57:50 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,45 +22,14 @@ void	unlink_fifo(char *f_name)
 	}
 }
 
-void	escape_single_quotes(char **cmds_split)
+void	escape_single_quotes(char *cmd_args)
 {
-	int32_t	i;
-	int32_t	c_i;
-	char	**new_cmds;
-	int32_t	count;
-	int32_t	count_sep;
+	int32_t	len;
+	int32_t	c_len;
 
-	i = 0;
-	count = 0;
-	while (cmds_split[i])
-		count++;
-	new_cmds = malloc(count + 1);
-	new_cmds[count] = NULL;
-	while (cmds_split[i])
-	{
-		c_i = 0;
-		count = 0;
-		count_sep = 0;
-		while (cmds_split[i][c_i])
-		{
-			if (cmds_split[i][c_i] == '\'')
-				count_sep++;
-			c_i++;
-			count++;
-		}
-		c_i = 0;
-		new_cmds[i] = malloc(count + count_sep + 1);
-		new_cmds[i][count + count_sep] = '\0';
-		while (cmds_split[i][c_i])
-		{
-			if (cmds_split[i][c_i] == '\'')
-			{
-				new_cmds[i][c_i++] = '\'';
-				new_cmds[i][c_i] = '\'';
-			}
-		}
-		i++;
-	}
+	len = ft_strlen(cmd_args);
+	c_len = ft_count_char(cmd_args, '\'');
+	
 }
 
 t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)

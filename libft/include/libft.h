@@ -133,5 +133,6 @@ void				*resize_pool(t_pool_info *pool);
 char				*ft_strjoin_temp(char const *s1, char const *s2);
 void				free_p_all(void);
 char				**ft_split_many(char *s, char *separators);
+int32_t				ft_count_char(char *str, char c);
 
 #endif
