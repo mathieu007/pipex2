@@ -6,7 +6,7 @@
 /*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 08:47:21 by math              #+#    #+#             */
-/*   Updated: 2023/03/05 16:24:14 by math             ###   ########.fr       */
+/*   Updated: 2023/03/05 16:39:32 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*_replace(char *str, char *temp, char to_replace, char *replace_by)
 			}
 		}
 		else
-			temp[i] = *str;
+			temp[i++] = *str;
 		str++;
 	}
 	temp[i] = '\0';
