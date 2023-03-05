@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 10:03:23 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 14:31:41 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/05 08:30:19 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,12 @@ char			*to_str(void *p);
 
 bool			initialize(void);
 
-t_lst	*lst_new_temp(int32_t array_size,
+t_lst			*lst_new_temp(int32_t array_size,
 					int32_t size_of_elem);
-t_lst	*lst_new_fixed(int32_t array_size,
-						int32_t size_of_elem);
-t_lst			*lst_new(int32_t array_elem_count, int32_t size_of_inner_elem);
+t_lst			*lst_new_fixed(int32_t array_size,
+					int32_t size_of_elem);
+t_lst			*lst_new(int32_t array_elem_count,
+					int32_t size_of_inner_elem);
 t_lst			*lst_new_static(void *data, int32_t max_capacity,
 					size_t size_of_elem);
 
@@ -107,10 +108,11 @@ void			*lst_to_array_static(t_lst *lst, void *dst);
 void			*lst_to_array(t_lst *lst);
 void			*lst_last(t_lst *lst);
 void			*lst_first(t_lst *lst);
-int32_t	lst_filter_last_index_of(t_lst *lst,
-									bool (*conditions)(void *item,
-													void *values),
-									void *values);
+
+int32_t			lst_filter_last_index_of(t_lst *lst,
+					bool (*conditions)(void *item,
+						void *values),
+					void *values);
 
 void			*lst_filter_last(t_lst *lst, bool (*conditions)(t_lst *lst,
 						int32_t index, void *values), void *values);
@@ -122,46 +124,46 @@ void			*lst_filter_first(t_lst *lst, bool (*conditions)(t_lst *lst,
 						int32_t index, void *val), void *val);
 void			*lst_filter_min(t_lst *lst, int32_t (*comparer)(t_lst *lst,
 						int32_t index, int32_t prev));
-int32_t	lst_filter_min_index(t_lst *lst,
-								int32_t (*comparer)(t_lst *lst, int32_t index,
-										int32_t prev));
+int32_t			lst_filter_min_index(t_lst *lst,
+					int32_t (*comparer)(t_lst *lst, int32_t index,
+						int32_t prev));
 int32_t			lst_filter_count(t_lst *lst, bool (*filter)(void *item1,
 						void *values), void *values);
 void			*lst_filter_max(t_lst *lst, void *(*comparer)(void *item1,
 						void *item2));
-int32_t			lst_filter_max_index(t_lst *lst, void *(*comparer)(void *first,
-						void *second));
-bool	lst_sequence_equal(t_lst *lst,
-						t_lst *to_compare);
-bool	lst_sequence_equal_ptr(t_lst *lst,
-							bool (*comparer)(t_lst *lst, int32_t index,
-									t_lst *to_compare),
-							t_lst *to_compare);
-int32_t	*lst_sel_int_to_array_temp(t_lst *lst,
-									int32_t (*select)(t_lst *lst,
-														int32_t index));
-t_lst	*lst_select_int(t_lst *lst,
-						int32_t (*select)(void *item));
-t_lst	*lst_select(t_lst *lst,
+int32_t			lst_filter_max_index(t_lst *lst,
+					void *(*comparer)(void *first, void *second));
+bool			lst_sequence_equal(t_lst *lst,
+					t_lst *to_compare);
+bool			lst_sequence_equal_ptr(t_lst *lst,
+					bool (*comparer)(t_lst *lst, int32_t index,
+						t_lst *to_compare),
+					t_lst *to_compare);
+int32_t			*lst_sel_int_to_array_temp(t_lst *lst,
+					int32_t (*select)(t_lst *lst,
+						int32_t index));
+t_lst			*lst_select_int(t_lst *lst,
+					int32_t (*select)(void *item));
+t_lst			*lst_select(t_lst *lst,
 					void *(*select)(void *item),
 					size_t size_of_elem);
 const void		*lst_get_array(t_lst *lst);
-int32_t	*lst_sel_int_to_array_fixed(t_lst *lst,
-									int32_t (*select)(t_lst *lst,
-														int32_t index));
-t_lst	*lst_select_to_lst_temp_pool(t_lst *lst,
-									void *(*select)(t_lst *lst, int32_t index),
-									size_t size_of_elem);
-void	*lst_filter_get_next(t_lst *lst,
-							bool (*conditions)(t_lst *lst, int32_t index,
-									void *values),
-							void *values,
-							int32_t start_index);
-void	*lst_filter_get_nth(t_lst *lst,
-							bool (*conditions)(t_lst *lst, int32_t index,
-									void *values),
-							void *values,
-							int32_t nth_item);
+int32_t			*lst_sel_int_to_array_fixed(t_lst *lst,
+					int32_t (*select)(t_lst *lst,
+						int32_t index));
+t_lst			*lst_select_to_lst_temp_pool(t_lst *lst,
+					void *(*select)(t_lst *lst, int32_t index),
+					size_t size_of_elem);
+void			*lst_filter_get_next(t_lst *lst,
+					bool (*conditions)(t_lst *lst, int32_t index,
+						void *values),
+					void *values,
+					int32_t start_index);
+void			*lst_filter_get_nth(t_lst *lst,
+					bool (*conditions)(t_lst *lst, int32_t index,
+						void *values),
+					void *values,
+					int32_t nth_item);
 t_lst			*lst_order_by(t_lst *lst, int32_t (*comparer)(t_lst *lst,
 						int32_t index, int32_t prev));
 t_lst			*lst_filter_range(t_lst *lst, int32_t start_index,
@@ -181,8 +183,8 @@ t_lst			*_internal_resize_insert(t_lst *lst, int index,
 					int32_t elem_count);
 t_lst			*_internal_resize_insert_temp(t_lst *lst, int32_t index,
 					int32_t elem_count_to_insert);
-t_group_by	*_internal_group_by_resize_temp(t_group_by *grp,
-											int32_t group_count_to_add);
+t_group_by		*_internal_group_by_resize_temp(t_group_by *grp,
+					int32_t group_count_to_add);
 
 uint8_t			*lst_data(t_lst *lst, int32_t index);
 void			*lst_get(t_lst *lst, int32_t index);
@@ -200,27 +202,27 @@ t_group_by		*_lst_group_by_add_temp(t_group_by *grp, t_lst *lst);
 t_lst			*lst_group_by_get_at(t_group_by *grp, int32_t index);
 t_group_by		*lst_group_by(t_lst *lst, bool (*comparer)(t_lst *lst,
 						int32_t index, int32_t prev_index));
-int32_t	lst_filter_index_of_start_at(t_lst *lst,
-										bool (*conditions)(t_lst *lst,
-														int32_t index,
-														void *values),
-										int32_t start_index,
-										void *values);
+int32_t			lst_filter_index_of_start_at(t_lst *lst,
+					bool (*conditions)(t_lst *lst,
+						int32_t index,
+						void *values),
+					int32_t start_index,
+					void *values);
 int32_t			lst_get_int(t_lst *lst, int32_t index);
 int32_t			*lst_addr_int_ptr(t_lst *lst, int32_t index);
 t_lst			*lst_add_int(t_lst *lst, int32_t value);
-t_lst	*lst_reverse_select(t_lst *lst,
-							void *(*select)(t_lst *lst,
-											int32_t index));
-int32_t	*lst_reverse_select_int(t_lst *lst,
-								int32_t (*select)(t_lst *lst,
-													int32_t index));
+t_lst			*lst_reverse_select(t_lst *lst,
+					void *(*select)(t_lst *lst,
+						int32_t index));
+int32_t			*lst_reverse_select_int(t_lst *lst,
+					int32_t (*select)(t_lst *lst,
+						int32_t index));
 bool			*lst_int_to_bool_array(t_lst *lst, int32_t len, bool reverse);
 t_lst			*lst_filter_exclude(t_lst *lst, t_lst *exclude_indices);
-t_lst	*lst_filter_exclude_temp(t_lst *lst,
-								t_lst *exclude_indices);
-t_lst	*lst_filter_exclude_fixed(t_lst *lst,
-								t_lst *exclude_indices);
+t_lst			*lst_filter_exclude_temp(t_lst *lst,
+					t_lst *exclude_indices);
+t_lst			*lst_filter_exclude_fixed(t_lst *lst,
+					t_lst *exclude_indices);
 
 t_lst			*lst_rev_to_lst_fixed(t_lst *lst);
 t_lst			*lst_reverse(t_lst *lst);
@@ -231,9 +233,9 @@ t_lst			*lst_filter_temp(t_lst *lst, bool (*match_item)(t_lst *lst,
 						int32_t index, void *values), void *values);
 t_lst			*lst_filter(t_lst *lst, bool (*match_item)(void *item,
 						void *values), void *values);
-t_lst	*_internal_resize_insert_pool(t_lst *lst,
-									int32_t index,
-									int32_t elem_count_to_insert);
+t_lst			*_internal_resize_insert_pool(t_lst *lst,
+					int32_t index,
+					int32_t elem_count_to_insert);
 bool			_lst_can_add(t_lst *lst, int32_t elem_count);
 int32_t			_lst_offset(t_lst *lst, int32_t index);
 void			*_lst_addr_offset(t_lst *lst, int32_t offset);
@@ -275,8 +277,9 @@ t_lst			*lst_reverse_int(t_lst *lst);
 void			*copy_temp(void *obj, size_t size_in_bytes);
 int32_t			*to_ints(void *p);
 void			*p_int2(int32_t value, int32_t value2);
-t_lst			*lst_filter_indices(t_lst *lst, bool (*match_item)(void *item,
-						void *values), void *values);
+t_lst			*lst_filter_indices(t_lst *lst,
+					bool (*match_item)(void *item, void *values),
+					void *values);
 t_lst			*lst_remove_at_end(t_lst *lst, int32_t count);
 
 #endif

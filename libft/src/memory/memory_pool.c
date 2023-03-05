@@ -15,7 +15,7 @@
 /// @brief pools can be of variable size index: 1 = 2, 2 = 4, 3 = 8, 4 = 16 ...
 /// @param
 /// @return
-t_pool_info	**get_pools(void)
+static inline t_pool_info	**get_pools(void)
 {
 	static t_pool_info	*pools[64];
 
@@ -54,4 +54,35 @@ void	*alloc(size_t size_in_bytes)
 	pool->count++;
 	*(int32_t *)(pool->slots[cur_index]) = chunk_id;
 	return ((void *)&(pool->slots[cur_index])[8]);
+}
+
+void	free_p_all(void)
+{
+	int32_t		i;
+	t_pool_info	**pools;
+
+	pools = get_pools();
+	i = 0;
+	while (i < MAX_POOLS)
+	{
+		free(pools[i]->slots);
+		free(pools[i]);
+		i++;
+	}
+}
+
+void	free_pool(void *data)
+{
+	t_pool_info	*pool;
+	int32_t		*to_free;
+	int32_t		chunk_size;
+
+	to_free = &((int32_t *)data)[-2];
+	chunk_size = to_free[0];
+	pool = get_pools()[chunk_size];
+	pool->count--;
+	pool->slots[to_free[1]] = pool->slots[pool->count];
+	pool->slots[pool->count] = (uint8_t *)to_free;
+	to_free[1] = pool->count;
+	((int32_t *)(pool->slots[pool->count]))[1] = to_free[1];
 }
