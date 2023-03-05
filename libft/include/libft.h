@@ -134,5 +134,8 @@ char				*ft_strjoin_temp(char const *s1, char const *s2);
 void				free_p_all(void);
 char				**ft_split_many(char *s, char *separators);
 int32_t				ft_count_char(char *str, char c);
+char				*ft_strdup_temp(const char *s1);
+char				*ft_replace_char_temp(char *str, char to_replace,
+						char *replace_by);
 
 #endif

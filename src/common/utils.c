@@ -6,11 +6,10 @@
 /*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/03/05 08:57:50 by math             ###   ########.fr       */
+/*   Updated: 2023/03/05 09:44:26 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "errno.h"
 #include "pipex.h"
 
 void	unlink_fifo(char *f_name)
@@ -20,16 +19,6 @@ void	unlink_fifo(char *f_name)
 		free_all();
 		perror("unlink() error");
 	}
-}
-
-void	escape_single_quotes(char *cmd_args)
-{
-	int32_t	len;
-	int32_t	c_len;
-
-	len = ft_strlen(cmd_args);
-	c_len = ft_count_char(cmd_args, '\'');
-	
 }
 
 t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
@@ -48,7 +37,7 @@ t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
 		cmds[i] = malloc(sizeof(t_cmd));
 		if (cmds[i] == NULL)
 			return (free_all(), NULL);
-		s_cmds = ft_split(argv[i], ' ');
+		s_cmds = ft_split(ft_replace_char_temp(argv[i], '\'', "\\'"), ' ');
 		if (s_cmds == NULL)
 			return (free_all(), NULL);
 		cmds[i]->args = s_cmds;
@@ -107,13 +96,13 @@ int32_t	open_files(t_proc *proc)
 	if (f_out == -1)
 	{
 		f_out = 0;
-		printf("%s: %s\n", sys_errlist[errno], proc->fds->f_out_name);
+		printf("%s: %s\n", strerror(errno), proc->fds->f_out_name);
 	}
 	f_in = open(proc->fds->f_in_name, O_RDONLY, 0777);
 	if (f_in == -1)
 	{
 		f_in = 0;
-		printf("%s: %s\n", sys_errlist[errno], proc->fds->f_in_name);
+		printf("%s: %s\n", strerror(errno), proc->fds->f_in_name);
 	}
 	dup2(f_in, STDIN_FILENO);
 	return (f_out);
