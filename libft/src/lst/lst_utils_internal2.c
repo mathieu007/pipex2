@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils_internal2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:07:08 by mroy              #+#    #+#             */
-/*   Updated: 2023/02/24 13:28:47 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/05 15:32:38 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ bool	_lst_can_add(t_lst *lst, int32_t elem_count)
 /// @param lst
 /// @param offset
 /// @return
-void	*_lst_addr_mid(t_lst *lst, int32_t offset)
+inline void	*_lst_addr_mid(t_lst *lst, int32_t offset)
 {
 	return ((void *)&lst->data[((lst->_capacity / 2) - (lst->_count / 2)
-				+ offset) * lst->_size]);
+			+ offset) * lst->_size]);
 }
 
 /// @brief get middle offset + a custom offset.
 /// @param lst
 /// @param offset
 /// @return
-int32_t	_lst_offset_mid(t_lst *lst, int32_t offset)
+inline int32_t	_lst_offset_mid(t_lst *lst, int32_t offset)
 {
 	return ((lst->_capacity / 2) - (lst->_count / 2) + offset);
 }
@@ -44,7 +44,7 @@ int32_t	_lst_offset_mid(t_lst *lst, int32_t offset)
 /// @param lst
 /// @param offset
 /// @return
-int32_t	_lst_index_mid(t_lst *lst, int32_t offset)
+inline int32_t	_lst_index_mid(t_lst *lst, int32_t offset)
 {
 	return (((lst->_capacity / 2) - (lst->_count / 2) + offset));
 }
@@ -53,7 +53,7 @@ int32_t	_lst_index_mid(t_lst *lst, int32_t offset)
 /// @param lst
 /// @param offset
 /// @return
-void	*_lst_addr_offset(t_lst *lst, int32_t offset)
+inline void	*_lst_addr_offset(t_lst *lst, int32_t offset)
 {
 	return (&lst->data[offset * lst->_size]);
 }

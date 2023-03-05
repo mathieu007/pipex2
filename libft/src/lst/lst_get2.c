@@ -15,7 +15,7 @@
 
 #include "lst.h"
 
-int32_t	*lst_addr_int_ptr(t_lst *lst, int32_t index)
+inline int32_t	*lst_addr_int_ptr(t_lst *lst, int32_t index)
 {
 	return ((int32_t *)(&(lst->data[(index + lst->_offset) * lst->_size])));
 }
