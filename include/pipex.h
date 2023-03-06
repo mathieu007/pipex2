@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:21:35 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/03 11:14:10 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/05 09:41:41 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+# include "errno.h"
 # include "libft.h"
 # include <fcntl.h>
 # include <stdio.h>
