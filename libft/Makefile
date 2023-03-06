@@ -49,9 +49,10 @@ SRC	=	src/alloc_pool/data_pool.c	\
 		src/ft_substr.c	\
 		src/ft_tolower.c	\
 		src/ft_toupper.c	\
+		src/ft_replace_temp.c	\
 		src/ft_substr_temp.c	\
+		src/ft_count_char.c	\
 		src/memory/memory_pool.c	\
-		src/memory/memory_pool_free.c	\
 		src/memory/memory_pool_resize.c	\
 		src/temp_pool.c	\
 
@@ -163,7 +164,6 @@ clean:
 	$(RM) -rf $(BUILDDIR)
 	$(RM) -rf $(BUILDDIR_LST)
 	$(RM) -rf $(BUILDDIR_BONUS)
-	$(RM) -rf $(NAME)
 
 fclean:	clean
 	$(RM) $(NAME)
@@ -182,18 +182,18 @@ $(OBJS): $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(INCDEP) -c $< -o $@
 
 $(NAME): $(OBJS) $(LST_OBJS) $(BONUS_OBJS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
-	mkdir -p $(dir $@)
-	$(AR) $@ $<
+	@mkdir -p $(dir $@)
+	@$(AR) $@ $<
 
 $(BUILDDIR_LST)/%.$(OBJEXT): $(LST_SRCDIR)/%.$(SRCEXT)
-	mkdir -p $(dir $@)
-	$(AR) $@ $<
+	@mkdir -p $(dir $@)
+	@$(AR) $@ $<
 	
 $(BUILDDIR_BONUS)/%.$(OBJEXT): $(BONUS_SRCDIR)/%.$(SRCEXT)
-	mkdir -p $(dir $@)
-	$(AR) $@ $<
+	@mkdir -p $(dir $@)
+	@$(AR) $@ $<
 
 .PHONY: bonus lst all clean fclean re

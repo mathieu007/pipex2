@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 18:17:09 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/06 16:38:24 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,72 @@ void	escape_single_quotes(char **cmds_split)
 				new_cmds[i][c_i] = '\'';
 			}
 		}
+		i++;
+	}
+}
+
+int32_t	find_dbl_quotes(char *str)
+{
+	int32_t	i;
+	int32_t	len;
+
+	len = ft_strlen(str);
+	if (len < 2)
+		return (-1);
+	i = 0;
+	while (i + 1 < len)
+	{
+		if (str[i] == '\\' && str[i + 1] == '\"')
+		{
+			if (i > 0 && str[i - 1] != '\\')
+				return (i + 1);
+			else if (i == 0)
+				return (i + 1);
+		}
+		i++;
+	}
+}
+
+int32_t	*count_cmd_args(char *str)
+{
+	int32_t	count;
+	int32_t	i;
+	int32_t	*values;
+
+	i = 0;
+	while (*str == ' ')
+		str++;
+	while (*str != ' ')
+	{
+		count++;
+		str++;
+	}
+	values[0] = count;
+	while (*str == ' ')
+		str++;
+	if (str[0] == '\\' && str[1] == '\"')
+	{
+		i = 2;
+		while (str[i] != '\0' && str[i + 1] != '\0' && str[i + 2] != '\0')
+		{
+			if (str[i] != '\\' && str[i + 1] == '\\' && str[i + 2] == '\"')
+				co
+		}
+	}
+	while (*str)
+}
+
+void	split_args(char *str)
+{
+	t_lst	*cmd_args;
+	int32_t	i;
+
+	i = 0;
+	
+	cmd_args = lst_new(20, sizeof(char *));
+	while (i <)
+	{
+		lst_add(cmd_args, );
 		i++;
 	}
 }

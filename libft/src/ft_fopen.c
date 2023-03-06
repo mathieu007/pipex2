@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fopen.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 08:05:20 by math              #+#    #+#             */
-/*   Updated: 2023/02/22 08:05:22 by math             ###   ########.fr       */
+/*   Updated: 2023/03/06 10:00:59 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 /// @return
 t_file	*ft_fopen(const char *path)
 {
-	t_file *stream;
+	t_file	*stream;
 
-	if (!(stream = (t_file *)malloc(sizeof(t_file))))
+	stream = (t_file *)malloc(sizeof(t_file));
+	if (!(stream))
 		return (NULL);
-	if ((stream->fd = open(path, O_RDONLY)) == -1)
+	stream->fd = open(path, O_RDONLY);
+	if (stream->fd == -1)
 	{
 		free(stream);
 		return (NULL);

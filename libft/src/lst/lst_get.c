@@ -15,14 +15,14 @@
 
 #include "lst.h"
 
-void	*lst_get(t_lst *lst, int32_t index)
+inline void	*lst_get(t_lst *lst, int32_t index)
 {
 	if (index >= lst->_count || index < 0)
 		exit(139);
 	return (*(void **)(&(lst->data[(index + lst->_offset) * lst->_size])));
 }
 
-void	**lst_addr_ptr(t_lst *lst, int32_t index)
+inline void	**lst_addr_ptr(t_lst *lst, int32_t index)
 {
 	return ((void **)(&(lst->data[(index + lst->_offset) * lst->_size])));
 }
@@ -31,17 +31,17 @@ void	**lst_addr_ptr(t_lst *lst, int32_t index)
 /// @param lst
 /// @param index
 /// @return
-void	*lst_addr(t_lst *lst, int32_t index)
+inline void	*lst_addr(t_lst *lst, int32_t index)
 {
 	return ((void *)(&(lst->data[(index + lst->_offset) * lst->_size])));
 }
 
-uint8_t	*lst_data(t_lst *lst, int32_t index)
+inline uint8_t	*lst_data(t_lst *lst, int32_t index)
 {
 	return (&lst->data[(lst->_offset + index) * lst->_size]);
 }
 
-int32_t	lst_get_int(t_lst *lst, int32_t index)
+inline int32_t	lst_get_int(t_lst *lst, int32_t index)
 {
 	if (index >= lst->_count || index < 0)
 		exit(139);
