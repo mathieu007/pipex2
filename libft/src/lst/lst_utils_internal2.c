@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 16:48:52 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/06 16:48:56 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/06 16:49:14 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	_lst_can_add(t_lst *lst, int32_t elem_count)
 inline void	*_lst_addr_mid(t_lst *lst, int32_t offset)
 {
 	return ((void *)&lst->data[((lst->_capacity / 2) - (lst->_count / 2)
-			+ offset) * lst->_size]);
+		+ offset) * lst->_size]);
 }
 
 /// @brief get middle offset + a custom offset.
