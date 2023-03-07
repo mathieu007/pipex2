@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:21:35 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/05 09:41:41 by math             ###   ########.fr       */
+/*   Updated: 2023/03/07 14:04:06 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 typedef struct s_file_d
 {
@@ -48,10 +52,10 @@ typedef struct s_proc
 	char		**envp;
 }				t_proc;
 
+void			error_exit(const char *msg, int32_t std);
 int32_t			open_files(t_proc *proc);
 void			unlink_fifo(char *f_name);
 void			usage(void);
-void			error_exit(const char *msg);
 void			execute(t_proc *proc, int32_t i);
 void			child_process(t_proc *proc, int32_t cmd_i);
 char			**parse_paths(char **envp);

@@ -1,0 +1,3 @@
+cat: Studio: No such file or directory
+cat: Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js: No such file or directory
+scripts/test_utils.sh: line 19: 94899 Abort trap: 6           $MEMLEAKS "$@"

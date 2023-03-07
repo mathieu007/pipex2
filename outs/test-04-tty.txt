@@ -1,0 +1,4 @@
+Error: : Undefined error: 0
+Error: Undefined error: 0
+Invalid argument count.
+Ex: ./pipex <file1> <cmd1> <cmd2> <file2>

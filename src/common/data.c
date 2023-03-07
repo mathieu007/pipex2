@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 14:55:02 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/07 13:23:59 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ t_proc	*init_data(int32_t argc, char **argv, char **envp)
 
 	proc = get_proc();
 	proc->here_doc = false;
-	if (ft_strncmp(argv[1], "./", 2) != 0)
-		proc->fds->f_in_name = ft_strjoin("./", argv[1]);
-	if (ft_strncmp(argv[1], "./", 2) != 0)
-		proc->fds->f_out_name = ft_strjoin("./", argv[argc - 1]);
+	proc->fds->f_in_name = argv[1];
+	proc->fds->f_out_name = argv[argc - 1];
 	proc->paths = parse_paths(envp);
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 	{

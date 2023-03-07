@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/06 16:38:24 by mroy             ###   ########.fr       */
-=======
-/*   Updated: 2023/03/05 16:33:15 by math             ###   ########.fr       */
->>>>>>> a354e7821b79de815774bb982eba0e5fba5b3bc1
+/*   Updated: 2023/03/07 14:08:30 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,122 +15,9 @@
 void	unlink_fifo(char *f_name)
 {
 	if (unlink((const char *)f_name) != 0)
-	{
-		free_all();
 		perror("unlink() error");
-	}
 }
 
-<<<<<<< HEAD
-void	escape_single_quotes(char **cmds_split)
-{
-	int32_t	i;
-	int32_t	c_i;
-	char	**new_cmds;
-	int32_t	count;
-	int32_t	count_sep;
-
-	i = 0;
-	count = 0;
-	while (cmds_split[i])
-		count++;
-	new_cmds = malloc(count + 1);
-	new_cmds[count] = NULL;
-	while (cmds_split[i])
-	{
-		c_i = 0;
-		count = 0;
-		count_sep = 0;
-		while (cmds_split[i][c_i])
-		{
-			if (cmds_split[i][c_i] == '\'')
-				count_sep++;
-			c_i++;
-			count++;
-		}
-		c_i = 0;
-		new_cmds[i] = malloc(count + count_sep + 1);
-		new_cmds[i][count + count_sep] = '\0';
-		while (cmds_split[i][c_i])
-		{
-			if (cmds_split[i][c_i] == '\'')
-			{
-				new_cmds[i][c_i++] = '\'';
-				new_cmds[i][c_i] = '\'';
-			}
-		}
-		i++;
-	}
-}
-
-int32_t	find_dbl_quotes(char *str)
-{
-	int32_t	i;
-	int32_t	len;
-
-	len = ft_strlen(str);
-	if (len < 2)
-		return (-1);
-	i = 0;
-	while (i + 1 < len)
-	{
-		if (str[i] == '\\' && str[i + 1] == '\"')
-		{
-			if (i > 0 && str[i - 1] != '\\')
-				return (i + 1);
-			else if (i == 0)
-				return (i + 1);
-		}
-		i++;
-	}
-}
-
-int32_t	*count_cmd_args(char *str)
-{
-	int32_t	count;
-	int32_t	i;
-	int32_t	*values;
-
-	i = 0;
-	while (*str == ' ')
-		str++;
-	while (*str != ' ')
-	{
-		count++;
-		str++;
-	}
-	values[0] = count;
-	while (*str == ' ')
-		str++;
-	if (str[0] == '\\' && str[1] == '\"')
-	{
-		i = 2;
-		while (str[i] != '\0' && str[i + 1] != '\0' && str[i + 2] != '\0')
-		{
-			if (str[i] != '\\' && str[i + 1] == '\\' && str[i + 2] == '\"')
-				co
-		}
-	}
-	while (*str)
-}
-
-void	split_args(char *str)
-{
-	t_lst	*cmd_args;
-	int32_t	i;
-
-	i = 0;
-	
-	cmd_args = lst_new(20, sizeof(char *));
-	while (i <)
-	{
-		lst_add(cmd_args, );
-		i++;
-	}
-}
-
-=======
->>>>>>> a354e7821b79de815774bb982eba0e5fba5b3bc1
 t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
 {
 	t_cmd	**cmds;
@@ -151,7 +34,7 @@ t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
 		cmds[i] = malloc(sizeof(t_cmd));
 		if (cmds[i] == NULL)
 			return (free_all(), NULL);
-		s_cmds = ft_split(ft_replace_char_temp(argv[i], '\'', "\\'"), ' ');
+		s_cmds = ft_split(argv[i], ' ');
 		if (s_cmds == NULL)
 			return (free_all(), NULL);
 		cmds[i]->args = s_cmds;
@@ -162,8 +45,7 @@ t_cmd	**parse_cmds(t_proc *proc, char **argv, int32_t count)
 	return (cmds);
 }
 
-/// @brief // linux path is ":", so handle PATH= and PATH:
-/// gros criss de cave check your linux path AGAIN.
+/// @brief
 /// @param envp
 /// @return
 char	**parse_paths(char **envp)
@@ -179,7 +61,6 @@ char	**parse_paths(char **envp)
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
 	paths = ft_split_many(envp[i] + 5, seps);
-	i = 0;
 	return (paths);
 }
 
@@ -206,18 +87,12 @@ int32_t	open_files(t_proc *proc)
 	int32_t	f_out;
 
 	proc->here_doc = false;
-	f_out = open(proc->fds->f_out_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (f_out == -1)
-	{
-		f_out = 0;
-		printf("%s: %s\n", strerror(errno), proc->fds->f_out_name);
-	}
-	f_in = open(proc->fds->f_in_name, O_RDONLY, 0777);
-	if (f_in == -1)
-	{
-		f_in = 0;
-		printf("%s: %s\n", strerror(errno), proc->fds->f_in_name);
-	}
+	f_out = open(proc->fds->f_out_name, O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	f_in = open(proc->fds->f_in_name, O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+	if (access(proc->fds->f_in_name, F_OK))
+		error_exit("infile not accessible.", 2);
 	dup2(f_in, STDIN_FILENO);
 	return (f_out);
 }
