@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 17:07:27 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/07 20:16:53 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 void	usage(void)
 {
-	perror("Error: ");
 	printf("Invalid argument count.\n");
 	printf("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n");
-	error_exit(NULL);
+	error_exit(NULL, 1);
 }
 
-/// @brief https://opensource.com/article/19/4/interprocess-communication-linux-channels
-/// @param argc
-/// @param argv
-/// @param envp
-/// @return
 int32_t	main(int32_t argc, char **argv, char **envp)
 {
 	t_proc	*proc;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/03 09:57:19 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/07 22:01:45 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,11 @@ void	free_cmds(t_proc *proc)
 	proc->cmds = NULL;
 }
 
-void	free_all(void)
+void	free_paths(t_proc *proc)
 {
-	t_proc	*proc;
 	int32_t	i;
 
 	i = 0;
-	proc = get_proc();
-	if (proc == NULL)
-		return ;
 	if (proc->paths)
 	{
 		while (proc->paths[i])
@@ -59,6 +55,26 @@ void	free_all(void)
 		}
 		free(proc->paths);
 		proc->paths = NULL;
+	}
+}
+
+void	free_all(void)
+{
+	t_proc	*proc;
+
+	proc = get_proc();
+	if (proc == NULL)
+		return ;
+	free_paths(proc);
+	if (proc->fds->f_in_name)
+	{
+		free(proc->fds->f_in_name);
+		proc->fds->f_in_name = NULL;
+	}
+	if (proc->fds->f_out_name)
+	{
+		free(proc->fds->f_out_name);
+		proc->fds->f_out_name = NULL;
 	}
 	if (proc->cmds != NULL)
 		free_cmds(proc);
