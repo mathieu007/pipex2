@@ -3,7 +3,7 @@ CC          	:= gcc
 
 #The Target Binary Program
 NAME			:= solong
-BONUS_NAME		:= pipex_bonus
+BONUS_NAME		:= bonus
 COMMONS_NAME	:= commons
 
 #The Directories, Source, Includes, Objects, Binary and Resources
