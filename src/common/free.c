@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/07 22:01:45 by math             ###   ########.fr       */
+/*   Updated: 2023/03/09 07:42:07 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ void	free_all(void)
 	if (proc == NULL)
 		return ;
 	free_paths(proc);
-	if (proc->fds->f_in_name)
+	if (proc->f_in_name)
 	{
-		free(proc->fds->f_in_name);
-		proc->fds->f_in_name = NULL;
+		free(proc->f_in_name);
+		proc->f_in_name = NULL;
 	}
-	if (proc->fds->f_out_name)
+	if (proc->f_out_name)
 	{
-		free(proc->fds->f_out_name);
-		proc->fds->f_out_name = NULL;
+		free(proc->f_out_name);
+		proc->f_out_name = NULL;
 	}
 	if (proc->cmds != NULL)
 		free_cmds(proc);

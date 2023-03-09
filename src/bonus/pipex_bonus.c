@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/07 20:01:28 by math             ###   ########.fr       */
+/*   Updated: 2023/03/09 08:08:12 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ int32_t	open_files_bonus(t_proc *proc, int32_t argc, char **argv)
 	if (proc->here_doc)
 	{
 		proc->here_doc = true;
-		f_out = open(proc->fds->f_out_name, O_WRONLY | O_CREAT | O_APPEND,
-				0777);
+		f_out = open(proc->f_out_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
 		here_doc(argv[2], argc);
 	}
 	else
