@@ -6,29 +6,34 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:03:11 by math              #+#    #+#             */
-/*   Updated: 2023/03/09 08:40:45 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/09 10:54:16 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "errno.h"
 #include "pipex.h"
 
-void	write_msg(const char *msg, int32_t stderror)
+void	write_msg(const char *msg, int32_t stderror, bool with_lf)
 {
 	if (msg != NULL)
 	{
 		write(stderror, msg, ft_strlen(msg));
-		write(stderror, "\n", 1);
+		if (with_lf)
+			write(stderror, "\n", 1);
 	}
 }
 
-void	write_error(int32_t stderror)
+void	write_error(int32_t stderror, bool with_lf)
 {
 	if (errno)
+	{
 		write(stderror, strerror(errno), ft_strlen(strerror(errno)));
+		if (with_lf)
+			write(stderror, "\n", 1);
+	}
 }
 
-void	error_exit(const char *msg, int32_t stderror)
+void	error_exit(const char *msg, int32_t stderror, bool show_error_msg)
 {
 	t_proc	*proc;
 
@@ -44,7 +49,9 @@ void	error_exit(const char *msg, int32_t stderror)
 		close(proc->f_out);
 		unlink_fifo(get_proc()->f_out_name);
 	}
-	write_msg(msg, stderror);
-	write_error(stderror);
+	if (msg)
+		write_msg(msg, stderror, true);
+	if (show_error_msg)
+		write_error(stderror, true);
 	exit(EXIT_FAILURE);
 }

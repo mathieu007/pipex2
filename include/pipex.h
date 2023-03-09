@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:21:35 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/09 09:08:17 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/09 10:52:27 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_proc
 int32_t		open_files(t_proc *proc);
 void		unlink_fifo(char *f_name);
 void		usage(void);
-void		error_exit(const char *msg, int32_t stderror);
+void		error_exit(const char *msg, int32_t stderror, bool show_error_msg);
 void		execute(t_proc *proc, int32_t i);
 void		child_process(t_proc *proc, int32_t cmd_i);
 char		**parse_paths(char **envp);
@@ -58,8 +58,8 @@ t_proc		*get_proc(void);
 t_proc		*init_data(int32_t argc, char **argv, char **envp);
 t_proc		*init_fds(int32_t *fds, int32_t i);
 void		exec_childs(t_proc *proc);
-void		write_msg(const char *msg, int32_t stderror);
-void		write_error(int32_t stderror);
+void		write_msg(const char *msg, int32_t stderror, bool with_lf);
+void		write_error(int32_t stderror, bool with_lf);
 char		*get_cmd(char *str);
 char		*get_arg_start(char *cmd);
 char		*get_cmd_start(char *cmd);

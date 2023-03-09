@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:57:14 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/08 14:52:42 by math             ###   ########.fr       */
+/*   Updated: 2023/03/09 11:09:56 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	child_process(t_proc *proc, int32_t i)
 
 	pid = fork();
 	if (pid == -1)
-		error_exit(NULL, 2);
+		error_exit(NULL, 2, true);
 	if (pid == 0)
 	{
 		close(proc->cmds[i]->file_in);
@@ -46,7 +46,7 @@ void	pipe_childs(t_proc *proc)
 	while (i < proc->cmds_count - 1)
 	{
 		if (pipe(fds) == -1)
-			error_exit(NULL, 2);
+			error_exit(NULL, 2, true);
 		proc = init_fds(fds, i);
 		i++;
 	}
@@ -68,11 +68,21 @@ void	execute(t_proc *proc, int32_t i)
 {
 	char	*fp_cmd;
 
+	if (!proc->paths)
+	{
+		write_msg("Command not found:", 2, false);
+		write_msg(proc->cmds[i]->cmd, 2, true);
+		error_exit(NULL, 2, false);
+	}
 	fp_cmd = get_full_path_cmd(proc, proc->cmds[i]->cmd);
 	if (!fp_cmd)
-		error_exit("Command not found", 2);
+	{
+		write_msg("Command not found:", 2, false);
+		write_msg(proc->cmds[i]->cmd, 2, true);
+		error_exit(NULL, 2, false);
+	}
 	if (execve(fp_cmd, proc->cmds[i]->args, proc->envp) == -1)
-		error_exit("Could not execve.", 2);
+		error_exit("Could not execve.", 2, true);
 	free(fp_cmd);
-	error_exit("Could not execve.", 2);
+	error_exit("Could not execve.", 2, true);
 }

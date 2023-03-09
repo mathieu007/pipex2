@@ -6,7 +6,7 @@
 /*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 20:16:34 by mathieu           #+#    #+#             */
-/*   Updated: 2022/11/08 11:20:02 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/09 10:05:05 by mroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 	int		word_len;
 
+	if (!s || *s == '\0')
+		return (NULL);
 	word_len = count_word(s, c);
 	split = (char **)malloc(sizeof(char **) * (word_len + 1));
 	if (!split)
