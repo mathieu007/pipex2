@@ -6,7 +6,7 @@
 /*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:57:14 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/07 20:46:27 by math             ###   ########.fr       */
+/*   Updated: 2023/03/08 14:52:42 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,6 @@ void	execute(t_proc *proc, int32_t i)
 		error_exit("Command not found", 2);
 	if (execve(fp_cmd, proc->cmds[i]->args, proc->envp) == -1)
 		error_exit("Could not execve.", 2);
+	free(fp_cmd);
+	error_exit("Could not execve.", 2);
 }

@@ -2,14 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
-/*   Created: 2023/02/28 07:52:12 by mroy              #+#    #+#             */
-/*   Updated: 2023/02/28 07:52:12 by mroy             ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/08 07:26:48 by math              #+#    #+#             */
+/*   Updated: 2023/03/08 18:26:45 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +18,14 @@
 # define MED_POOL_SIZE 33553920
 # define LARGE_POOL_SIZE 134215680
 # define TEMP_BUFFER 1000000
-# define BUFF_SIZE 4096
+
+# define BUFFER_SIZE 4096
 # include "lst.h"
 # include <fcntl.h>
+# include <limits.h>
 # include <stdbool.h>
 # include <stdint.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
@@ -54,7 +54,7 @@ typedef struct s_list
 typedef struct s_file
 {
 	int				fd;
-	char			buf[BUFF_SIZE + 1];
+	char			buf[BUFFER_SIZE + 1];
 	int				i;
 }					t_file;
 
@@ -137,5 +137,7 @@ int32_t				ft_count_char(char *str, char c);
 char				*ft_strdup_temp(const char *s1);
 char				*ft_replace_char_temp(char *str, char to_replace,
 						char *replace_by);
+char				*ft_strcpy(char *dst, const char *src);
+char				*ft_strncpy(char *dest, const char *src, int32_t len);
 
 #endif

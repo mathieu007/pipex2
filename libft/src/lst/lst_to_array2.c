@@ -36,3 +36,18 @@ const int32_t	*lst_get_int_array(t_lst *lst)
 		return (NULL);
 	return ((int32_t *)&lst->data[lst->_offset * lst->_size]);
 }
+
+void	*lst_free_to_array(t_lst *lst)
+{
+	uint8_t	*arr;
+
+	if (!lst)
+		return (NULL);
+	arr = malloc(lst->_count * lst->_size);
+	if (!arr)
+		return (NULL);
+	ft_memcpy(arr, &lst->data[lst->_offset * lst->_size], lst->_count
+		* lst->_size);
+	lst_free(lst);
+	return ((void *)arr);
+}
