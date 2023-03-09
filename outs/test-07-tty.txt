@@ -1,4 +1,1 @@
-Error: : Undefined error: 0
-Error: Undefined error: 0
-Invalid argument count.
-Ex: ./pipex <file1> <cmd1> <cmd2> <file2>
+bash: ../pipex: cannot execute binary file: Exec format error

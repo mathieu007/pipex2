@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:21:35 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/07 14:04:06 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/07 19:55:00 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
-
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
 
 typedef struct s_file_d
 {
@@ -52,10 +48,10 @@ typedef struct s_proc
 	char		**envp;
 }				t_proc;
 
-void			error_exit(const char *msg, int32_t std);
 int32_t			open_files(t_proc *proc);
 void			unlink_fifo(char *f_name);
 void			usage(void);
+void			error_exit(const char *msg, int32_t stderror);
 void			execute(t_proc *proc, int32_t i);
 void			child_process(t_proc *proc, int32_t cmd_i);
 char			**parse_paths(char **envp);
@@ -67,5 +63,7 @@ t_proc			*get_proc(void);
 t_proc			*init_data(int32_t argc, char **argv, char **envp);
 t_proc			*init_fds(int32_t *fds, int32_t i);
 void			exec_childs(t_proc *proc);
+void			write_msg(const char *msg, int32_t stderror);
+void			write_error(int32_t stderror);
 
 #endif

@@ -15,7 +15,7 @@ INCDIR			:= include
 BUILDDIR		:= obj
 BUILDDIR_BONUS	:= obj_bonus
 BUILDDIR_COMMONS:= obj_common
-TARGETDIR		:= bin
+TARGETDIR		:= 
 SRCEXT			:= c
 OBJEXT			:= o
 LIBFT_DIR		:= libft
@@ -50,7 +50,7 @@ all: directories bonus $(NAME) $(BONUS_NAME)
 remake: cleaner all
 	
 directories:
-	mkdir -p $(TARGETDIR)
+	# mkdir -p $(TARGETDIR)
 	mkdir -p $(BUILDDIR)
 	mkdir -p $(BUILDDIR_BONUS)
 	mkdir -p $(BUILDDIR_COMMONS)
@@ -78,11 +78,11 @@ bonus: $(OBJECTS) $(OBJECTS_BONUS)
 #Link
 $(NAME): $(OBJECTS) 
 	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(INCLIBFTDEP) $(INCDEP) -o $(TARGETDIR)/$(NAME) $^ $(LIBFT)
+	$(CC) $(CFLAGS) $(INCLIBFTDEP) $(INCDEP) -o $(NAME) $^ $(LIBFT)
 
 $(BONUS_NAME): $(OBJECTS_BONUS)
 	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(INCLIBFTDEP) $(INCDEP) -o $(TARGETDIR)/$(BONUS_NAME) $^ $(LIBFT)
+	$(CC) $(CFLAGS) $(INCLIBFTDEP) $(INCDEP) -o $(BONUS_NAME) $^ $(LIBFT)
 
 $(BUILDDIR_COMMONS)/%.$(OBJEXT): $(COMMONSDIR)/%.$(SRCEXT)
 	mkdir -p $(dir $@)

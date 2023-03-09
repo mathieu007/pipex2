@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fgetc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 09:52:59 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/06 09:53:03 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/08 07:09:43 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_fgetc(t_file *stream)
 	if (!stream->buf[stream->i])
 	{
 		stream->i = 0;
-		rval = read(stream->fd, stream->buf, BUFF_SIZE);
+		rval = read(stream->fd, stream->buf, BUFFER_SIZE);
 		if (rval <= 0)
 		{
 			stream->buf[0] = 0;

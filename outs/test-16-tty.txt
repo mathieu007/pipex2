@@ -1,3 +1,1 @@
-usage: hostname [-fs] [name-of-host]
-cat: Studio: No such file or directory
-cat: Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js: No such file or directory
+bash: ../pipex: cannot execute binary file: Exec format error

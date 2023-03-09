@@ -1,2 +1,1 @@
-wc: Studio: open: No such file or directory
-wc: Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js: open: No such file or directory
+bash: ../pipex: cannot execute binary file: Exec format error

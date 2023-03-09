@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:47:31 by mroy              #+#    #+#             */
-/*   Updated: 2023/03/08 14:53:56 by math             ###   ########.fr       */
+/*   Updated: 2023/03/08 18:26:25 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strncpy(char *dest, const char *src, int32_t len)
 {
-	char	*dest;
-	int		src_l;
+	int	i;
 
-	src_l = ft_strlen(s1);
-	dest = (char *)malloc(sizeof(char) * (src_l + 1));
-	if (dest == NULL)
-		return ((void *)0);
-	dest = ft_strcpy(dest, s1);
+	i = 0;
+	if (!src)
+		return (NULL);
+	while (src[i] && i < len)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
 	return (dest);
 }

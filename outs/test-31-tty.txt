@@ -1,2 +1,1 @@
-cat: illegal option -- 1
-usage: cat [-benstuv] [file ...]
+bash: ../pipex: cannot execute binary file: Exec format error

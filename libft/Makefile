@@ -35,11 +35,13 @@ SRC	=	src/alloc_pool/data_pool.c	\
 		src/ft_split_temp.c	\
 		src/ft_strchr.c	\
 		src/ft_strdup.c	\
+		src/ft_strcpy.c	\
 		src/ft_striteri.c	\
 		src/ft_strjoin.c	\
 		src/ft_strjoin_temp.c	\
 		src/ft_strlcat.c	\
 		src/ft_strlcpy.c	\
+		src/ft_strncpy.C	\
 		src/ft_strlen.c	\
 		src/ft_strmapi.c	\
 		src/ft_strncmp.c	\

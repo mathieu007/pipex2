@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mroy <mroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 08:02:59 by math              #+#    #+#             */
-/*   Updated: 2023/03/07 14:22:13 by mroy             ###   ########.fr       */
+/*   Updated: 2023/03/07 20:16:53 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	usage(void)
 {
 	printf("Invalid argument count.\n");
 	printf("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n");
-	error_exit(NULL);
+	error_exit(NULL, 1);
 }
 
 int32_t	main(int32_t argc, char **argv, char **envp)
