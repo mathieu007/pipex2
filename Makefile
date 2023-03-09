@@ -2,7 +2,7 @@
 CC          	:= gcc
 
 #The Target Binary Program
-NAME			:= pipex
+NAME			:= solong
 BONUS_NAME		:= pipex_bonus
 COMMONS_NAME	:= commons
 
