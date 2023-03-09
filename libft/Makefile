@@ -41,7 +41,7 @@ SRC	=	src/alloc_pool/data_pool.c	\
 		src/ft_strjoin_temp.c	\
 		src/ft_strlcat.c	\
 		src/ft_strlcpy.c	\
-		src/ft_strncpy.C	\
+		src/ft_strncpy.c	\
 		src/ft_strlen.c	\
 		src/ft_strmapi.c	\
 		src/ft_strncmp.c	\

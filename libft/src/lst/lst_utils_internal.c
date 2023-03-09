@@ -40,7 +40,7 @@ t_lst	*_internal_resize_temp(t_lst *lst, int32_t elem_count_to_add)
 		return (NULL);
 	new_offset = (new_length / 2) - ((lst->_count + elem_count_to_add) / 2);
 	ft_memcpy(&lst->data[new_offset * lst->_size], &old_data[lst->_offset
-		* lst->_size], lst->_count * lst->_size);
+			* lst->_size], lst->_count * lst->_size);
 	lst->_capacity = new_length;
 	lst->_offset = new_offset;
 	free(old_data);
@@ -52,7 +52,9 @@ t_lst	*_internal_resize(t_lst *lst, int32_t elem_count_to_add)
 	uint8_t	*old_data;
 	int32_t	new_length;
 	int32_t	new_offset;
+	void	*data;
 
+	data = lst->data;
 	new_length = lst->_capacity * 3;
 	old_data = lst_addr(lst, 0);
 	while (new_length <= lst->_count + elem_count_to_add)
@@ -65,7 +67,7 @@ t_lst	*_internal_resize(t_lst *lst, int32_t elem_count_to_add)
 	lst->_offset = new_offset;
 	ft_memmove(lst_addr(lst, 0), old_data, lst->_count * lst->_size);
 	lst->_capacity = new_length;
-	lst->_free_data((void *)old_data);
+	lst->_free_data(data);
 	return (lst);
 }
 
@@ -98,8 +100,8 @@ t_lst	*_internal_resize_insert(t_lst *lst, int32_t index, int32_t elem_count)
 		ft_memmove(lst_addr(lst, new_offset), old_data, index * lst->_size);
 	}
 	ft_memmove(lst_addr(lst, index + elem_count),
-		&old_data[index * lst->_size],
-		(lst->_count - index) * lst->_size);
+				&old_data[index * lst->_size],
+				(lst->_count - index) * lst->_size);
 	lst->_free_data((void *)old_data);
 	return (lst);
 }
